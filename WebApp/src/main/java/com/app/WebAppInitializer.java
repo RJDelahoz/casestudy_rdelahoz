@@ -17,10 +17,11 @@ public class WebAppInitializer implements WebApplicationInitializer {
 
 		AnnotationConfigWebApplicationContext webApplicationContext = new AnnotationConfigWebApplicationContext();
 		webApplicationContext.register(WebConfig.class);
-		//		create a dispatcher servlet
+
+		// servlet creation
 		DispatcherServlet dispatcherServlet = new DispatcherServlet(webApplicationContext);
 
-		//		register the dispatcher servlet
+		// servlet registration
 		ServletRegistration.Dynamic registration = servletContext.addServlet(
 				"rootDispatcher", dispatcherServlet);
 		registration.setLoadOnStartup(1);
