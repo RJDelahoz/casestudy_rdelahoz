@@ -1,0 +1,36 @@
+.post-tag {
+	font-size: 0.8rem;
+	font-weight: bold;
+	text-transform: uppercase;
+	border-bottom: 1px solid #e0e5ec;
+	margin-bottom: 3rem;
+	padding-bottom: 0.5rem;
+}
+
+.post-content {
+	color: inherit !important;
+	text-decoration: none !important;
+}
+
+.post-details {
+	display: flex;
+	align-items: center;
+	margin-right: 0.5rem;
+}
+
+.post-details .post-details-profile {
+	height: 2.25rem;
+	width: 2.25rem;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+	flex-shrink: 0;
+}
+.post-details .post-details-info .post-details-name {
+	font-size: 0.9rem;
+	line-height: 1;
+	margin-bottom: 0.25rem;
+}
+.post-details .post-details-info .post-details-date {
+	font-size: 0.75rem;
+	line-height: 1;
+}

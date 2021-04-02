@@ -13,7 +13,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan(basePackages = "com.app.controller")
+@ComponentScan(basePackages = "com.app")
 public class WebConfig implements WebMvcConfigurer {
 
 	@Bean
@@ -40,7 +40,7 @@ public class WebConfig implements WebMvcConfigurer {
 	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/css/*").addResourceLocations("/assets/css/");
 		registry.addResourceHandler("/js/*").addResourceLocations("/assets/js/");
-		registry.addResourceHandler("/img/*").addResourceLocations("/assets/img/");
+		registry.addResourceHandler("/img/**").addResourceLocations("/assets/img/");
 	}
 
 	@Override

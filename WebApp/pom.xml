@@ -33,7 +33,6 @@
             <version>5.4.6.Final</version>
         </dependency>
 
-
         <!--        JUNIT-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -48,7 +47,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!--        SPRING FRAMEWORK-->
+        <!--        SPRING-->
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-aspects -->
         <dependency>
             <groupId>org.springframework</groupId>

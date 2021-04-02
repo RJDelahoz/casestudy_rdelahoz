@@ -15,34 +15,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Controller
-public class TestController {
+public class BaseController {
 
 	@RequestMapping("/")
 	public String getLandingPage() {
+		System.out.println("\n\nHome Page\n\n");
 		return "index";
 	}
 
-	@RequestMapping("/blog")
-	public String getBlogPage(Model model) {
-		model.addAttribute("message", "BLOG PAGE");
-		return "blog";
-	}
-
 	@RequestMapping("/support")
-	public String getSupportPage(Model model) {
-		model.addAttribute("message", "SUPPORT PAGE");
+	public String getBlogPage() {
+		System.out.println("\n\nContact Us Page\n\n");
 		return "support";
 	}
 
 	@RequestMapping("/login")
-	public String getLoginPage(Model model) {
-		model.addAttribute("message", "LOGIN PAGE");
-
+	public String getLoginPage() {
+		System.out.println("\n\nLogin Page\n\n");
 		return "login";
 	}
 
-	@RequestMapping(value = "/User")
-	public void getUser(@RequestParam("email") String email){
-		// do whatever with email
+	@RequestMapping("/register")
+	public String getRegistrationPage() {
+		System.out.println("\n\nRegistration Page\n\n");
+		return "registration";
 	}
+
+	@RequestMapping("/password-recovery")
+	public String getSupportPage() {
+		System.out.println("\n\nPassword recovery Page\n\n");
+		return "password-recovery";
+	}
+
 }
