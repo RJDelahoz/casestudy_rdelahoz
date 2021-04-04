@@ -10,14 +10,17 @@
 .post-content {
 	color: inherit !important;
 	text-decoration: none !important;
+	text-align: left;
 }
-
 .post-details {
 	display: flex;
 	align-items: center;
 	margin-right: 0.5rem;
 }
-
+.post-details-profile {
+	height: fit-content;
+	width: fit-content;
+}
 .post-details .post-details-profile {
 	height: 2.25rem;
 	width: 2.25rem;
