@@ -1,21 +1,29 @@
 package com.app.controller;
 
+import com.app.model.Authority;
 import com.app.model.Credential;
 import com.app.model.User;
-import com.app.repo.UserRepository;
-import com.app.service.PostService;
+import com.app.service.CredentialService;
 import com.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Controller
 public class BaseController {
+
+
+	private final CredentialService credentialService;
+	private final UserService userService;
+
+	@Autowired
+	public BaseController(CredentialService credentialService, UserService userService) {
+		this.credentialService = credentialService;
+		this.userService = userService;
+	}
 
 	@RequestMapping("/")
 	public String getLandingPage() {
@@ -23,7 +31,7 @@ public class BaseController {
 		return "index";
 	}
 
-	@RequestMapping("/support")
+	@RequestMapping("/contactus")
 	public String getBlogPage() {
 		System.out.println("\n\nContact Us Page\n\n");
 		return "support";
