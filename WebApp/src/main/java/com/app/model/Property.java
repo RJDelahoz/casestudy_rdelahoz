@@ -28,9 +28,18 @@ public class Property {
 
 	@OneToMany(targetEntity = Post.class,
 			cascade = CascadeType.ALL,
-			fetch = FetchType.LAZY)
-	@JoinTable(name = "post_property")
+			fetch = FetchType.EAGER)
+	@JoinTable(name = "property_post")
 	private Set<Post> posts = new LinkedHashSet<>();
+
+	@OneToMany(targetEntity = Ticket.class,
+			cascade = CascadeType.ALL,
+			fetch = FetchType.LAZY)
+	@JoinTable(name = "property_ticket")
+	private Set<Ticket> tickets = new LinkedHashSet<>();
+
+	public Property() {
+	}
 
 	public Property(String address, String city, String state, String zipcode) {
 		this.address = address;
@@ -39,63 +48,5 @@ public class Property {
 		this.zipcode = zipcode;
 	}
 
-	public Property(String address, String city, String state, String zipcode, Set<Post> posts) {
-		this.address = address;
-		this.city = city;
-		this.state = state;
-		this.zipcode = zipcode;
-		this.posts = posts;
-	}
 
-	public Property() {
-
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public String getZipcode() {
-		return zipcode;
-	}
-
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
-	}
-
-	public Set<Post> getPosts() {
-		return posts;
-	}
-
-	public void setPosts(Set<Post> posts) {
-		this.posts = posts;
-	}
 }

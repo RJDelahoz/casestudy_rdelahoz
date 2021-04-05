@@ -5,6 +5,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
@@ -30,26 +31,34 @@ public class User {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Credential credential;
 
-	@OneToMany(targetEntity = Post.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "user_post")
-	private Set<Post> posts = new HashSet<>();
+	@OneToOne
+	@JoinColumn(name = "organization")
+	private Organization organization;
+
+	@OneToMany(mappedBy = "user",
+			orphanRemoval = true,
+			fetch = FetchType.LAZY,
+			cascade = CascadeType.ALL)
+	private Set<Post> posts = new LinkedHashSet<>();
+
+	@OneToMany(mappedBy = "user",
+			orphanRemoval = true,
+			fetch = FetchType.LAZY,
+			cascade = CascadeType.ALL)
+	private Set<Post> tickets = new LinkedHashSet<>();
 
 	public User() {
 	}
 
-	public User(String email, String fName, String lName, Credential credential) {
+	public User(String email, String fName, String lName, Credential credential, Organization organization,
+				Set<Post> posts, Set<Post> tickets) {
 		this.email = email;
 		this.fName = fName;
 		this.lName = lName;
 		this.credential = credential;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
+		this.organization = organization;
+		this.posts = posts;
+		this.tickets = tickets;
 	}
 
 	public String getEmail() {
@@ -58,14 +67,6 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public Credential getCredential() {
-		return credential;
-	}
-
-	public void setCredential(Credential credential) {
-		this.credential = credential;
 	}
 
 	public String getfName() {
@@ -84,11 +85,35 @@ public class User {
 		this.lName = lName;
 	}
 
+	public Credential getCredential() {
+		return credential;
+	}
+
+	public void setCredential(Credential credential) {
+		this.credential = credential;
+	}
+
+	public Organization getOrganization() {
+		return organization;
+	}
+
+	public void setOrganization(Organization organization) {
+		this.organization = organization;
+	}
+
 	public Set<Post> getPosts() {
 		return posts;
 	}
 
 	public void setPosts(Set<Post> posts) {
 		this.posts = posts;
+	}
+
+	public Set<Post> getTickets() {
+		return tickets;
+	}
+
+	public void setTickets(Set<Post> tickets) {
+		this.tickets = tickets;
 	}
 }

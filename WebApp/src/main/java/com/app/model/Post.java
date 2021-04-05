@@ -21,6 +21,15 @@ public class Post {
 	@Column(name = "content", nullable = false)
 	private String content;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "property")
+	private Property property;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user")
+	private User user;
+
+
 	public Post() {
 	}
 
