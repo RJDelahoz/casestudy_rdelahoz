@@ -26,17 +26,18 @@ public class Property {
 	@Column(name = "zipcode", nullable = false, length = 5)
 	private String zipcode;
 
-	@OneToMany(targetEntity = Post.class,
-			cascade = CascadeType.ALL,
-			fetch = FetchType.EAGER)
-	@JoinTable(name = "property_post")
-	private Set<Post> posts = new LinkedHashSet<>();
+	@Column(name = "memo", nullable = true)
+	private String memo;
 
 	@OneToMany(targetEntity = Ticket.class,
 			cascade = CascadeType.ALL,
 			fetch = FetchType.LAZY)
 	@JoinTable(name = "property_ticket")
 	private Set<Ticket> tickets = new LinkedHashSet<>();
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "organization")
+	private Organization managedBy;
 
 	public Property() {
 	}
@@ -48,5 +49,59 @@ public class Property {
 		this.zipcode = zipcode;
 	}
 
+	public String getAddress() {
+		return address;
+	}
 
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
+	public String getMemo() {
+		return memo;
+	}
+
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
+
+	public Set<Ticket> getTickets() {
+		return tickets;
+	}
+
+	public void setTickets(Set<Ticket> tickets) {
+		this.tickets = tickets;
+	}
+
+	public Organization getManagedBy() {
+		return managedBy;
+	}
+
+	public void setManagedBy(Organization managedBy) {
+		this.managedBy = managedBy;
+	}
 }
