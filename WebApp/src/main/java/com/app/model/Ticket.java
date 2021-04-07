@@ -21,6 +21,10 @@ public class Ticket {
 	@Column(name = "description", nullable = false, length = 280)
 	private String description;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user")
+	private User user;
+
 	public Ticket() {
 	}
 

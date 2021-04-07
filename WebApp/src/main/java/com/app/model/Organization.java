@@ -16,22 +16,19 @@ public class Organization {
 	@Column(name = "name")
 	private String name;
 
-	@OneToOne(mappedBy = "organization")
-	private Credential credential;
+	@OneToOne
+	private User managedBy;
 
-	@OneToMany(targetEntity = Property.class,
-			cascade = CascadeType.ALL,
+	@OneToMany(cascade = CascadeType.ALL,
 			fetch = FetchType.LAZY)
-	@JoinTable(name = "organization_property")
 	private Set<Property> properties = new HashSet<>();
 
 	public Organization() {
 	}
 
-	public Organization(String name, Credential credential, Set<Property> properties) {
+	public Organization(String name, User managedBy) {
 		this.name = name;
-		this.credential = credential;
-		this.properties = properties;
+		this.managedBy = managedBy;
 	}
 
 	public String getName() {
@@ -42,12 +39,12 @@ public class Organization {
 		this.name = name;
 	}
 
-	public Credential getCredential() {
-		return credential;
+	public User getManagedBy() {
+		return managedBy;
 	}
 
-	public void setCredential(Credential credential) {
-		this.credential = credential;
+	public void setManagedBy(User managedBy) {
+		this.managedBy = managedBy;
 	}
 
 	public Set<Property> getProperties() {

@@ -14,7 +14,6 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
 	private long id;
 
 	@Column(name = "email", unique = true, nullable = false)
@@ -31,33 +30,31 @@ public class User {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Credential credential;
 
-	@OneToOne
-	@JoinColumn(name = "organization")
+	@OneToOne(mappedBy = "managedBy", cascade = CascadeType.ALL)
 	private Organization organization;
 
-	@OneToMany(mappedBy = "user",
-			orphanRemoval = true,
-			fetch = FetchType.LAZY,
-			cascade = CascadeType.ALL)
-	private Set<Post> posts = new LinkedHashSet<>();
+	@OneToMany(targetEntity = Property.class,
+			fetch = FetchType.EAGER)
+	@JoinTable(name = "user_property")
+	private Set<Property> properties = new HashSet<>();
 
 	@OneToMany(mappedBy = "user",
 			orphanRemoval = true,
 			fetch = FetchType.LAZY,
 			cascade = CascadeType.ALL)
-	private Set<Post> tickets = new LinkedHashSet<>();
+	private Set<Ticket> tickets = new LinkedHashSet<>();
 
 	public User() {
 	}
 
 	public User(String email, String fName, String lName, Credential credential, Organization organization,
-				Set<Post> posts, Set<Post> tickets) {
+				Set<Property> properties, Set<Ticket> tickets) {
 		this.email = email;
 		this.fName = fName;
 		this.lName = lName;
 		this.credential = credential;
 		this.organization = organization;
-		this.posts = posts;
+		this.properties = properties;
 		this.tickets = tickets;
 	}
 
@@ -101,19 +98,19 @@ public class User {
 		this.organization = organization;
 	}
 
-	public Set<Post> getPosts() {
-		return posts;
+	public Set<Property> getProperties() {
+		return properties;
 	}
 
-	public void setPosts(Set<Post> posts) {
-		this.posts = posts;
+	public void setProperties(Set<Property> properties) {
+		this.properties = properties;
 	}
 
-	public Set<Post> getTickets() {
+	public Set<Ticket> getTickets() {
 		return tickets;
 	}
 
-	public void setTickets(Set<Post> tickets) {
+	public void setTickets(Set<Ticket> tickets) {
 		this.tickets = tickets;
 	}
 }

@@ -25,9 +25,6 @@ public class Credential {
 	@Column(name = "enabled", nullable = false)
 	private boolean enabled;
 
-	@OneToOne
-	private Organization organization;
-
 	// Authority
 	@OneToMany(mappedBy = "credential",
 			cascade = CascadeType.ALL,
@@ -65,14 +62,6 @@ public class Credential {
 
 	public boolean isEnabled() {
 		return enabled;
-	}
-
-	public Organization getOrganization() {
-		return organization;
-	}
-
-	public void setOrganization(Organization organization) {
-		this.organization = organization;
 	}
 
 	public void setEnabled(boolean enabled) {
