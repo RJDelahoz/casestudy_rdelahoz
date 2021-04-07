@@ -44,19 +44,21 @@
                         <div class="page-header-content pt-4">
                             <div class="row align-items-center justify-content-between">
                                 <div class="col-auto mt-4">
-                                    <h1 class="page-header-title">
-                                        Welcome USERNAME!
+                                    <h1 class="page-header-title" th:text="${welcomeMessage}">
                                     </h1>
                                     <div th:if="${authority == '[MANAGER]'}">
                                         <div  class="page-header-subtitle">
-                                            Welcome MANAGER, these are the properties under your organization.
+                                            These are the properties you manage.
                                         </div>
                                     </div>
                                     <div th:if="${authority == '[USER]'}">
                                         <div  class="page-header-subtitle">
-                                            Welcome USER, these are the properties you are member .
+                                            These are the properties you are a member of.
                                         </div>
                                     </div>
+                                </div>
+                                <div th:if="${authority == '[MANAGER]'}" class="col-12 col-xl-auto mt-4">
+                                    BUTTON GOES HERE
                                 </div>
                             </div>
                         </div>

@@ -19,8 +19,9 @@ public class Organization {
 	@OneToOne
 	private User managedBy;
 
-	@OneToMany(cascade = CascadeType.ALL,
-			fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY,
+			cascade = CascadeType.ALL,
+			mappedBy = "managedBy")
 	private Set<Property> properties = new HashSet<>();
 
 	public Organization() {

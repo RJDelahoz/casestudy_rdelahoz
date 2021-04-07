@@ -1,9 +1,10 @@
 package com.app.repo;
 
-import com.app.model.Post;
+import com.app.model.Property;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PostRepository extends JpaRepository<Post, Long> {
+public interface PropertyRepository extends JpaRepository<Property, Long> {
+
 }

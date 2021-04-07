@@ -49,7 +49,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/multi-user-select").permitAll()
 				.antMatchers("/register-manager").permitAll()
 				.antMatchers("/register-user").permitAll()
-				.antMatchers("/register").permitAll()
 				.antMatchers("/password-recovery").permitAll()
 				.antMatchers("/contactus").permitAll()
 				.antMatchers("/welcome").hasAnyAuthority("ADMIN", "MANAGER" ,"USER")

@@ -63,4 +63,9 @@ public class CredentialService implements UserDetailsService {
 	public Optional<Credential> getCredentialByUsername(String username){
 		return credentialRepository.findByUsername(username);
 	}
+
+	// Delete
+	public void deleteCredential(long id) {
+		credentialRepository.deleteById(id);
+	}
 }

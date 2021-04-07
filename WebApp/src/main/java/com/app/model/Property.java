@@ -35,8 +35,8 @@ public class Property {
 	@JoinTable(name = "property_ticket")
 	private Set<Ticket> tickets = new LinkedHashSet<>();
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "organization")
+	@ManyToOne
+	@JoinColumn(name = "managedBy")
 	private Organization managedBy;
 
 	public Property() {

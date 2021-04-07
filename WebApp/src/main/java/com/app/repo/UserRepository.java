@@ -14,4 +14,6 @@ import java.util.List;
 public interface UserRepository extends CrudRepository<User, Long> {
 
 	User getUserByEmail(String email);
+
+	User getUserByCredential_Username(String username);
 }
