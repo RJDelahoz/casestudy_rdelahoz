@@ -78,3 +78,10 @@
 	background-color: rgba(135, 255, 98, 0.336);
 }
 
+.bg-green {
+	background-color: #00ac69 !important;
+}
+
+.bg-yellow {
+	background-color: #f4a100 !important;
+}

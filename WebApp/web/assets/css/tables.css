@@ -1,0 +1,135 @@
+.card {
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.table thead th {
+    font-size: .65rem;
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.table th {
+    font-weight: 600;
+}
+
+.table td,
+.table th {
+    font-size: .8125rem;
+    white-space: nowrap;
+    margin-bottom: 4em;
+}
+
+.table.align-items-center td,
+.table.align-items-center th {
+    vertical-align: middle;
+}
+
+.table .thead-dark th {
+    color: #4d7bca;
+    background-color: #1c345d00;
+}
+
+.table .thead-light th {
+    color: #494949;
+}
+
+.table-flush td,
+.table-flush th {
+    border-right: 0;
+    border-left: 0;
+}
+
+.table-flush tbody tr:first-child td,
+.table-flush tbody tr:first-child th {
+    border-top: 0;
+}
+
+.table-flush tbody tr:last-child td,
+.table-flush tbody tr:last-child th {
+    border-bottom: 0;
+}
+
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: .375rem;
+}
+
+.page-link {
+    line-height: 1.25;
+    position: relative;
+    display: block;
+    margin-left: -1px;
+    padding: .5rem .75rem;
+    color: #8898aa;
+    border: 1px solid #dee2e6;
+    background-color: #fff;
+}
+
+.page-link:hover {
+    z-index: 2;
+    text-decoration: none;
+    color: #8898aa;
+    border-color: #dee2e6;
+    background-color: #dee2e6;
+}
+
+.page-link:focus {
+    z-index: 2;
+    outline: 0;
+    box-shadow: none;
+}
+
+.page-link:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+
+.page-item:first-child .page-link {
+    margin-left: 0;
+    border-top-left-radius: .375rem;
+    border-bottom-left-radius: .375rem;
+}
+
+.page-item:last-child .page-link {
+    border-top-right-radius: .375rem;
+    border-bottom-right-radius: .375rem;
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    border-color: #5e72e4;
+    background-color: #5e72e4;
+}
+
+.page-item.disabled .page-link {
+    cursor: auto;
+    pointer-events: none;
+    color: #8898aa;
+    border-color: #dee2e6;
+    background-color: #fff;
+}
+
+.card .table {
+    margin-bottom: 0;
+}
+
+.card .table td,
+.card .table th {
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+p {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.7;
+}
+
+.bg-transparent {
+    background-color: rgba(0, 0, 0, 0);
+}

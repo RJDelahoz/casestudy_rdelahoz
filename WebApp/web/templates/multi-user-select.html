@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=\, initial-scale=1.0"/>
+        <title>Select User</title>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous"/>
+
+        <link rel="stylesheet" th:href="@{css/auth-style.css}"/>
+    </head>
+    <body>
+        <div id="layoutAuthentication" class="bg-dark">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <!-- Create Organization-->
+                            <div class="col-xl-5 col-lg-6 col-md-8 col-sm-11 mt-4">
+                                <div class="card text-center h-100">
+                                    <div class="card-body px-5 pt-5 d-flex flex-column">
+                                        <div>
+                                            <div class="h3 text-primary font-weight-300">
+                                                Manager
+                                            </div>
+                                            <p class="text-muted mb-4">
+                                                Create an organization along with your account
+                                            </p>
+                                        </div>
+                                        <div class="icons align-items-center mx-auto mt-auto">
+                                            <img class="icon-users" th:src="@{img/svg/globe.svg}"/>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-transparent px-5 py-4">
+                                        <div class="small text-center">
+                                            <a class="btn btn-block btn-primary" th:href="@{/register-manager}">
+                                                Signup As Manager
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-5 col-lg-6 col-md-8 col-sm-11 mt-4">
+                                <div class="card text-center h-100">
+                                    <div class="card-body px-5 pt-5 d-flex flex-column align-items-between">
+                                        <div>
+                                            <div class="h3 text-secondary font-weight-300">
+                                                Resident
+                                            </div>
+                                            <p class="text-muted mb-4">
+                                                Create a basic account
+                                            </p>
+                                        </div>
+                                        <div class="icons align-items-center mx-auto">
+                                            <img class="icon-user" th:src="@{img/svg/user.svg}"/>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-transparent px-5 py-4">
+                                        <div class="small text-center">
+                                            <a class="btn btn-block btn-secondary" th:href="@{/register-user}">
+                                                Signup As User
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>

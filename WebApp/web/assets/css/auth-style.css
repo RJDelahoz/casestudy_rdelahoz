@@ -77,3 +77,13 @@
 .card-footer {
 	background-color: rgba(135, 255, 98, 0.336);
 }
+
+.icons {
+	display: inline-flex;
+	position: relative;
+}
+.icons .icon-user {
+	height: 4rem;
+	width: 4rem;
+	color: #6900c7;
+}

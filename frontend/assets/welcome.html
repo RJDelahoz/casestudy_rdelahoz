@@ -16,80 +16,211 @@
 
 		<link rel="stylesheet" href="css/user-layout-style.css" />
 		<link rel="stylesheet" href="css/board-style.css" />
-		
 	</head>
 	<body class="bg-dark">
-		<nav class="topnav navbar navbar-expand justify-content-between navbar-dark">
-			<a class="navbar-brand" href="welcome.html">
-                WebApp
-            </a>
+		<nav
+			class="topnav navbar navbar-expand justify-content-between navbar-dark"
+		>
+			<a class="navbar-brand" href="welcome.html"> PMP </a>
 			<ul class="navbar-nav align-items-center ml-auto">
 				<li class="nav-item mr-3">
-					<a class="nav-link" role="button">
-						Work Order
-					</a>
+					<a class="nav-link" role="button"> Work Order </a>
 				</li>
 				<li class="nav-item mr-3 mr-lg-0">
-					<a class="btn ml-lg-4 btn-primary" href="">
-						Log Out
-					</a>
+					<a class="btn ml-lg-4 btn-primary" href=""> Log Out </a>
 				</li>
 			</ul>
 		</nav>
 
 		<div id="layout_content">
 			<main>
-				<header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+				<header
+					class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10"
+				>
 					<div class="container">
 						<div class="page-header-content pt-4">
-							<div class="row align-items-center justify-content-between">
+							<div
+								class="row align-items-center justify-content-between"
+							>
 								<div class="col-auto mt-4">
 									<h1 class="page-header-title">
-										Hello there! 
+										Hello there!
 									</h1>
 									<div class="page-header-subtitle">
-										Community Post - Join the conversation!
+										Keep updated with activities going on.
 									</div>
 								</div>
 								<div class="col-12 col-xl-auto mt-4">
-									COMMUNITY NAME <!--PLACE HOLDER OR COMMUNITY NAME-->
+									<!-- Large modal -->
+									<button
+										class="btn btn-green"
+										type="button"
+										data-toggle="modal"
+										data-target="#exampleModalLg"
+									>
+										New Announcement
+									</button>
+									<form>
+										<div
+											class="modal fade"
+											id="exampleModalLg"
+											tabindex="-1"
+											role="dialog"
+											aria-labelledby="myLargeModalLabel"
+											aria-hidden="true"
+										>
+											<div
+												class="modal-dialog modal-lg"
+												role="document"
+											>
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5
+															class="modal-title"
+															id="staticBackdropLabel"
+														>
+															New Announcement
+														</h5>
+														<button
+															class="close"
+															type="button"
+															data-dismiss="modal"
+															aria-label="Close"
+														>
+															<span
+																aria-hidden="true"
+															>
+																×
+															</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														<div
+															class="row justify-content-center"
+														>
+															<div
+																class="col-lg-10"
+															>
+																<div
+																	class="form-group"
+																>
+																	<label
+																		for="subject"
+																	>
+																		Subject
+																	</label>
+																	<input
+																		class="form-control py-4"
+																		id="subject"
+																		type="text"
+																		placeholder="Subject"
+																	/>
+																</div>
+																<div
+																	class="form-group"
+																>
+																	<label
+																		for="inputMessage"
+																		class="small"
+																	>
+																		Message
+																	</label>
+																	<textarea
+																		class="form-control"
+																		id="inputMessage"
+																		type="text"
+																		placeholder="Enter your message..."
+																		rows="4"
+																		maxlength="280"
+																	></textarea>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="modal-footer">
+														<button
+															class="btn btn-secondary"
+															type="button"
+															data-dismiss="modal"
+														>
+															Close
+														</button>
+														<button
+															class="btn btn-primary"
+															type="submit"
+															data-dismiss="modal"
+														>
+															Submit
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>
 					</div>
 				</header>
 				<!-- Main page content-->
-				<section class="py-10"> 
+				<section class="py-10">
 					<div class="container mt-n10">
 						<div class="row justify-content-center">
 							<div class="card mb-4">
-								<div class="card-header justify-content-between">
+								<div
+									class="card-header justify-content-between"
+								>
 									<h5>
-										APRIL FOOLS
+										Water shut off (valve replacement
+										project)
 									</h5>
 									<div>
-										<button class="btn btn-yellow btn-icon" type="button">
-											<img src="img/svg/edit.svg"/>
+										<button
+											class="btn btn-blue btn-icon"
+											type="button"
+										>
+											<img src="img/svg/save.svg" />
 										</button>
-										<button class="btn btn-red btn-icon" type="button">
-											<img src="img/svg/trash-2.svg"/>
+										<button
+											class="btn btn-yellow btn-icon"
+											type="button"
+										>
+											<img src="img/svg/edit.svg" />
+										</button>
+										<button
+											class="btn btn-red btn-icon"
+											type="button"
+										>
+											<img src="img/svg/trash-2.svg" />
 										</button>
 									</div>
 								</div>
 								<div class="card-body">
 									<p class="post-content">
-										Lorem ipsum dolor sit amet,
-										consectetur adipisicing elit. Qui
-										dicta minus molestiae vel beatae
-										natus eveniet ratione temporibus
-										aperiam harum alias officiis
-										assumenda officia quibusdam deleniti
-										eos cupiditate dolore doloribus!
+										Water shut off (valve replacement
+										project) Please be advised the building
+										will be undergoing a main valve
+										<br/><br/><br/>
+										replacement project starting next week
+										Tuesday November 10th, 2020 (11/10/2020). 
+										B-LINE - Please note the plumber may need 
+										to access up to TWO apartments toward 
+										the completion of the project 
+										(mid-afternoon) on each day listed to 
+										run water. 
+										<br/><br/><br/>
+										*Even though we are starting off with the 
+										B-line first, please note the full building 
+										water will be off during this time in order to
+										repair the valve.
 									</p>
 								</div>
 								<div class="card-footer">
-									<div class="post-details ">
-										<img class="post-details-profile" src="img/avatars1.png"/>
+									<div class="post-details">
+										<img
+											class="post-details-profile"
+											src="img/avatars1.png"
+										/>
 										<div class="post-details-info">
 											<div class="post-details-name">
 												Test Test
@@ -104,7 +235,6 @@
 						</div>
 					</div>
 				</section>
-				
 			</main>
 		</div>
 
