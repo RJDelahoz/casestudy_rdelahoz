@@ -39,22 +39,31 @@
 
 		<div id="layout_content">
 			<main>
-				<header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
-					<div class="container">
-						<div class="page-header-content pt-4">
-							<div class="row align-items-center justify-content-between">
-								<div class="col-auto mt-4">
-									<h1 class="page-header-title">
-										Ticket Center 
-									</h1>
-								</div>
-								<div class="col-12 col-xl-auto mt-4">
-									 <!--PLACE HOLDER OR COMMUNITY NAME-->
-								</div>
-							</div>
-						</div>
-					</div>
-				</header>
+                <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+                    <div class="container">
+                        <div class="page-header-content pt-4">
+                            <div class="row align-items-center justify-content-between">
+                                <div class="col-auto mt-4">
+                                    <h1 class="page-header-title" th:text="${welcomeMessage}">
+                                    </h1>
+                                    <div th:if="${authority == '[MANAGER]'}">
+                                        <div  class="page-header-subtitle">
+                                            These are the properties you manage.
+                                        </div>
+                                    </div>
+                                    <div th:if="${authority == '[USER]'}">
+                                        <div  class="page-header-subtitle" th:text="${userProperty.getAddress()}">
+                                        </div>
+                                    </div>
+                                </div>>
+                                <div class="col-12 col-xl-auto mt-4">
+                                    <h2 th:text="${userProperty.getManagedBy().getName()}">
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
 				<!-- Main page content-->
 				<section class="py-10"> 
 					<div class="container mt-n10">

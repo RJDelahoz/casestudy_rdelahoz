@@ -19,7 +19,6 @@
 .table th {
     font-size: .8125rem;
     white-space: nowrap;
-    margin-bottom: 4em;
 }
 
 .table.align-items-center td,
@@ -129,7 +128,6 @@ p {
     font-weight: 300;
     line-height: 1.7;
 }
-
 .bg-transparent {
     background-color: rgba(0, 0, 0, 0);
 }

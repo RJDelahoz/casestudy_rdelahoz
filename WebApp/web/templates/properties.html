@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <meta charset="UTF-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Document</title>
+        <meta charset="UTF-8">
+        <title>Properties</title>
 
         <!-- Bootstrap CSS -->
         <link
@@ -16,29 +14,25 @@
 
         <link rel="stylesheet" th:href="@{css/user-layout-style.css}"/>
         <link rel="stylesheet" th:href="@{css/ticket-style.css}"/>
-
     </head>
     <body class="bg-dark">
         <nav class="topnav navbar navbar-expand justify-content-between navbar-dark">
-            <a class="navbar-brand" th:href="@{/welcome}">
-                WebApp
+            <a class="navbar-brand" href="welcome.html">
+                PMP
             </a>
             <ul class="navbar-nav align-items-center ml-auto">
                 <li class="nav-item mr-3">
-                    <a class="nav-link" role="button" th:href="@{/ticket-center}">
-                        <div class="font-weight-500">
-                            Ticket Center
-                        </div>
+                    <a class="nav-link" role="button">
+                        Work Order
                     </a>
                 </li>
                 <li class="nav-item mr-3 mr-lg-0">
-                    <a class="btn font-weight-500 ml-lg-4 btn-primary" th:href="@{/logout}">
+                    <a class="btn ml-lg-4 btn-primary" th:href="@{/logout}">
                         Log Out
                     </a>
                 </li>
             </ul>
         </nav>
-
         <div id="layout_content">
             <main>
                 <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
@@ -46,27 +40,17 @@
                         <div class="page-header-content pt-4">
                             <div class="row align-items-center justify-content-between">
                                 <div class="col-auto mt-4">
-                                    <h1 class="page-header-title" th:text="${welcomeMessage}">
+                                    <h1 class="page-header-title" th:text="${message}">
                                     </h1>
-                                    <div th:if="${authority == '[MANAGER]'}">
-                                        <div class="page-header-subtitle">
-                                            These are the properties you manage.
-                                        </div>
+                                    <div class="page-header-subtitle">
+                                        These properties belong to your organization.
                                     </div>
-                                    <div th:if="${authority == '[USER]'}">
-                                        <div class="page-header-subtitle" th:text="${userProperty.getAddress()}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-xl-auto mt-4">
-                                    <h2 th:text="${userProperty.getManagedBy().getName()}">
-                                    </h2>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </header>
-                !-- Main page content-->
+                <!-- Main page content-->
                 <div class="container mt-n10">
                     <div class="row">
                         <div class="col">
@@ -94,34 +78,29 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="property: ${orgPropertiesListBean}">
-                                                <th scope="row">
-                                                    <div class="align-items-center">
-                                                        <span class="text-sm" th:text="${property.getId()}">
-                                                        </span>
-                                                    </div>
-                                                </th>
-                                                <td th:text="${property}">
+                                            <tr  th:each="property: ${propertySet}">
+                                                <td style="vertical-align: middle" th:text="${property.getId()}">
                                                 </td>
-                                                <td th:text="${property.getAddress()}">
+                                                <td style="vertical-align: middle" th:text="${property.getAddress()}">
                                                 </td>
-                                                <td th:text="${property.getCity()}">
+                                                <td style="vertical-align: middle" th:text="${property.getCity()}">
                                                 </td>
-                                                <td th:text="${property.getState()}">
+                                                <td style="vertical-align: middle" th:text="${property.getState()}">
                                                 </td>
-                                                <td th:text="${property.getZipcode()}">
+                                                <td style="vertical-align: middle" th:text="${property.getZipcode()}">
                                                 </td>
-                                                <td class="text-right">
-                                                    <a class="btn ml-lg-4 btn-red"
+                                                <td>
+                                                    <a class="btn ml-4 btn-icon btn-green"
                                                        th:href="@{/ViewProperty(id=${property.getId()})}">
-                                                        DELETE
+                                                        <img th:src="@{img/svg/eye.svg}"/>
                                                     </a>
+
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="card-footer py-4">
+                                <div class="card-footer" >
                                     <nav aria-label="...">
                                         <ul class="pagination justify-content-end mb-0">
                                             <li class="page-item disabled">
@@ -158,23 +137,6 @@
                 </div>
             </main>
         </div>
-
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script
-                src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-                crossorigin="anonymous"
-        ></script>
-        <script
-                src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-                crossorigin="anonymous"
-        ></script>
-        <script
-                src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-                crossorigin="anonymous"
-        ></script>
     </body>
+
 </html>
