@@ -4,6 +4,7 @@ import com.app.model.User;
 import com.app.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +40,6 @@ public class UserService  {
 		return StreamSupport.stream(userRepository.findAll().spliterator(), false)
 				.collect(Collectors.toList());
 	}
-
 
 	// Delete
 	public void deleteUserById(long id) {

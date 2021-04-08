@@ -23,7 +23,11 @@ public class Ticket {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user")
-	private User user;
+	private User createdBy;
+
+	@ManyToOne
+	@JoinColumn(name = "property")
+	private Property property;
 
 	public Ticket() {
 	}
@@ -64,5 +68,21 @@ public class Ticket {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public User getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(User createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Property getProperty() {
+		return property;
+	}
+
+	public void setProperty(Property property) {
+		this.property = property;
 	}
 }

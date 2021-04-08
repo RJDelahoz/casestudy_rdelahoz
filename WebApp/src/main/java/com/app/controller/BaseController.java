@@ -37,31 +37,6 @@ public class BaseController {
 	@RequestMapping("/")
 	public String getLandingPage() {
 		System.out.println("\n\nHome Page\n\n");
-		String email = "root@groot.com";
-		String username = "root";
-		Optional<Credential> optionalCredential = credentialService.getCredentialByUsername(username);
-
-		if (!optionalCredential.isPresent()) {
-			Credential credential = new Credential();
-			credential.setUsername(username);
-			credential.setPassword(new BCryptPasswordEncoder().encode("password"));
-
-			credential.setEnabled(true);
-			Authority authority = new Authority();
-			authority.setRole("ADMIN");
-			authority.setCredential(credential);
-
-			credential.getAuthorities().add(authority);
-
-
-			User user = new User();
-			user.setEmail(email);
-			user.setfName("Ricardo");
-			user.setlName("Delahoz");
-			user.setCredential(credential);
-
-			userService.addUser(user);
-		}
 		return "index";
 	}
 

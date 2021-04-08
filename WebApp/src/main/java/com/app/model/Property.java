@@ -2,7 +2,6 @@ package com.app.model;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
@@ -29,15 +28,19 @@ public class Property {
 	@Column(name = "memo", nullable = true)
 	private String memo;
 
-	@OneToMany(targetEntity = Ticket.class,
-			cascade = CascadeType.ALL,
-			fetch = FetchType.LAZY)
-	@JoinTable(name = "property_ticket")
-	private Set<Ticket> tickets = new LinkedHashSet<>();
-
 	@ManyToOne
 	@JoinColumn(name = "managedBy")
 	private Organization managedBy;
+
+	@OneToMany(fetch = FetchType.LAZY,
+			cascade = CascadeType.ALL,
+			mappedBy = "property")
+	private Set<User> users = new HashSet<>();
+
+	@OneToMany(fetch = FetchType.LAZY,
+			cascade = CascadeType.ALL,
+			mappedBy = "property")
+	private Set<Ticket> tickets = new HashSet<>();
 
 	public Property() {
 	}
@@ -47,6 +50,14 @@ public class Property {
 		this.city = city;
 		this.state = state;
 		this.zipcode = zipcode;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getAddress() {
@@ -89,6 +100,14 @@ public class Property {
 		this.memo = memo;
 	}
 
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
+
 	public Set<Ticket> getTickets() {
 		return tickets;
 	}
@@ -103,5 +122,16 @@ public class Property {
 
 	public void setManagedBy(Organization managedBy) {
 		this.managedBy = managedBy;
+	}
+
+	@Override
+	public String toString() {
+		return "Property{" +
+				"id=" + id +
+				", address='" + address + '\'' +
+				", city='" + city + '\'' +
+				", state='" + state + '\'' +
+				", zipcode='" + zipcode + '\'' +
+				'}';
 	}
 }

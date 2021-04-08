@@ -6,15 +6,13 @@ import com.app.service.OrganizationService;
 import com.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
-import java.util.Set;
 
 @Controller
 public class UserController {
@@ -32,16 +30,15 @@ public class UserController {
 	}
 
 	@RequestMapping("/welcome")
-	public String welcomeHandler(Model model,
-								 Authentication authentication,
-								 HttpServletRequest request) {
+	public ModelAndView welcomeHandler(Model model,
+									   Authentication authentication,
+									   HttpServletRequest request) {
 
 		String username = request.getUserPrincipal().getName();
 		String role = authentication.getAuthorities().toString();
-
 		User user = userService.getUserByUsername(username);
 		if (role.contains("ADMIN")) {
-			return "redirect:/admin";
+			return new ModelAndView("redirect:/admin");
 		}
 
 		if (role.contains("MANAGER")) {
@@ -51,38 +48,39 @@ public class UserController {
 			if (optionalOrganization.isPresent()) {
 				if (optionalOrganization.get().getProperties().isEmpty()) {
 					model.addAttribute("propertyForm", new Property());
-					return "register-property";
+					return new ModelAndView("register-property");
 				} else {
 					model.addAttribute("orgPropertiesListBean",
 							optionalOrganization.get().getProperties());
+					optionalOrganization.get().getProperties().forEach(System.out::println);
+					return new ModelAndView("redirect:/properties");
 				}
 			}
 		} else if (role.contains("USER")) {
-			Set<Property> properties = user.getProperties();
-			if (properties.isEmpty()) {
-				System.out.println(username + " is not registered under any properties.");
+			if (user.getProperty() == null) {
+				return new ModelAndView("request-access");
 			} else {
-				model.addAttribute("userPropertiesListBean",
-						properties);
+				model.addAttribute("userProperty", user.getProperty());
 			}
 		}
 
 		model.addAttribute("authority", role);
 		model.addAttribute("welcomeMessage", HelperClass.greetingHelper(username));
-		return "welcome";
+		return new ModelAndView("welcome");
 	}
 
 	@RequestMapping("/ticket-center")
-	public String ticketCenterHandler(HttpServletRequest request,
+	public String ticketCenterHandler(Model model,
+									  HttpServletRequest request,
 									  Authentication authentication) {
 		String username = request.getUserPrincipal().getName();
 		String role = authentication.getAuthorities().toString();
 
 		User user = userService.getUserByUsername(username);
 		if (role.contains("MANAGER")) {
-			System.out.println("THESE ARE THE TICKET REQUEST FOR ALL THE PROPERTIES UNDER YOU ORG.");
-		}else if (role.contains("USER")) {
-			System.out.println("THESE ARE THE TICKET REQUEST FOR ALL THE PROPERTIES YOU ARE A PART OF.");
+			model.addAttribute("");
+		} else if (role.contains("USER")) {
+			System.out.println("THESE ARE THE TICKET REQUEST FOR ALL THE YOU ARE A PART OF.");
 		}
 		return "ticket-center";
 	}
