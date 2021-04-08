@@ -116,6 +116,13 @@ small {
 	background-color: #0061f2;
 	border-color: #0061f2;
 }
+.btn-secondary {
+	color: #fff;
+	background-color: #4824d4;
+	border-color: #4824d4;
+}
+
+
 
 .navbar .container,
 .navbar .container-fluid,
@@ -177,7 +184,6 @@ small {
 }
 .card-footer {
 	padding: 1rem 1.35rem;
-	background-color: rgba(33, 40, 50, 0.03);
 	border-top: 1px solid rgba(33, 40, 50, 0.125);
 	align-content: flex-end;
 }
@@ -188,11 +194,9 @@ small {
 .bg-primary {
 	background-color: #0061f2 !important;
 }
-
 .bg-secondary {
 	background-color: #6900c7 !important;
 }
-
 .bg-dark {
 	background-color: #212832 !important;
 }
@@ -309,13 +313,13 @@ html {
 }
 .card .card-header {
 	font-weight: 1000;
+	color: white;
 }
 
 .card.bg-dark .card-footer,
 .card.bg-dark .card-header {
 	border-color: rgba(255, 255, 255, 0.15);
 }
-
 .page-header .page-header-content {
 	padding-top: 3rem;
 	padding-bottom: 3rem;
@@ -340,6 +344,28 @@ html {
 }
 .page-header.page-header-dark .page-header-subtitle {
 	color: rgba(255, 255, 255, 0.5);
+}
+
+.footer {
+	font-size: 0.875rem;
+}
+
+.footer .footer-brand {
+	font-size: 1.2rem;
+	font-weight: 700;
+	margin-bottom: 0.25rem;
+}
+
+.footer.footer-dark {
+	color: whitesmoke;
+}
+
+.footer.footer-dark hr {
+	border-color: white;
+}
+
+.footer.footer-light {
+	color: #a7aeb8;
 }
 
 .btn-yellow {
@@ -431,3 +457,9 @@ textarea.form-control {
 .section-preheading {
 	color: white;
 }
+
+.secondary {
+	color: #4824d4;
+}
+
+.bg-secondary

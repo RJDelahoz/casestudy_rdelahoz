@@ -13,13 +13,45 @@
               crossorigin="anonymous"/>
 
         <link rel="stylesheet" th:href="@{css/auth-style.css}"/>
+        <link rel="stylesheet" th:href="@{css/user-layout-style.css}"/>
     </head>
     <body>
-        <div id="layoutAuthentication" class="bg-dark">
+        <div id="layoutAuthentication" class="bg-gradient-primary-to-secondary">
+            <!-- Navbar-->
+            <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+                <div class="container">
+                    <a class="navbar-brand" href="#">
+                        WebApp
+                    </a>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto mr-lg-5">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/}">
+                                    Home
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/contactus}">
+                                    Support
+                                </a>
+                            </li>
+                            <li class="nav-item text-white">
+                                <a class="nav-link" th:href="@{/login}">
+                                    Login
+                                </a>
+                            </li>
+                        </ul>
+                        <!--                                PLACE HOLDER FOR MULTIPLE TENANT REGISTRATION-->
+                        <a class="btn font-weight-500 ml-lg-4 btn-primary" th:href="@{/multi-user-select}">
+                            Get Started
+                        </a>
+                    </div>
+                </div>
+            </nav>
             <div id="layoutAuthentication_content">
                 <main>
                     <div class="container">
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center mt-5">
                             <!-- Create Organization-->
                             <div class="col-xl-5 col-lg-6 col-md-8 col-sm-11 mt-4">
                                 <div class="card text-center h-100">
@@ -49,7 +81,7 @@
                                 <div class="card text-center h-100">
                                     <div class="card-body px-5 pt-5 d-flex flex-column align-items-between">
                                         <div>
-                                            <div class="h3 text-secondary font-weight-300">
+                                            <div class="h3 secondary font-weight-300">
                                                 Resident
                                             </div>
                                             <p class="text-muted mb-4">
@@ -72,6 +104,46 @@
                         </div>
                     </div>
                 </main>
+            </div>
+            <div id="layout_footer">
+                <footer class="footer pt-5 pb-3 mt-5 bg-dark footer-dark">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="footer-brand">WebApp</div>
+                                <div class="mb-3">Lorem Ipsum</div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                                        <div class="text-uppercase-expanded text-xs mb-4">Welcome</div>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2"><a href="#">Home</a></li>
+                                            <li class="mb-2"><a href="#">Support</a></li>
+                                            <li class="mb-2"><a href="#">Get Started</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="text-uppercase-expanded text-xs mb-4">Legal</div>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2"><a href="#">Privacy Policy</a></li>
+                                            <li class="mb-2"><a href="#">Terms and Conditions</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-5"/>
+                        <div class="row align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; Case study 2021</div>
+                            <div class="col-md-6 text-md-right small">
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
             </div>
         </div>
     </body>
