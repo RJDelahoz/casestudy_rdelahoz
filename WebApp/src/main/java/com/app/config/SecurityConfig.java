@@ -58,6 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/ticket-center/property").hasAnyAuthority("MANAGER")
 				.antMatchers("/property").hasAnyAuthority("MANAGER")
 				.antMatchers("/properties").hasAnyAuthority("MANAGER")
+				.antMatchers("/memo").hasAnyAuthority("MANAGER")
 				.antMatchers("/joinProperty").hasAnyAuthority("USER")
 				.antMatchers("/admin/**").hasAnyAuthority("ADMIN")
 				.anyRequest().authenticated()

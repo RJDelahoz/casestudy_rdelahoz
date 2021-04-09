@@ -1,5 +1,8 @@
 package com.app.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +16,7 @@ public class Property {
 	@Column(name = "id")
 	private long id;
 
-	@Column(name = "address", nullable = false)
+	@Column(name = "address", nullable = false, unique = true)
 	private String address;
 
 	@Column(name = "city", nullable = false)
@@ -25,8 +28,9 @@ public class Property {
 	@Column(name = "zipcode", nullable = false, length = 5)
 	private String zipcode;
 
-	@Column(name = "memo", nullable = true)
-	private String memo;
+	@OneToOne(mappedBy = "property", cascade = CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private Memo memo;
 
 	@ManyToOne
 	@JoinColumn(name = "managedBy")
@@ -92,11 +96,11 @@ public class Property {
 		this.zipcode = zipcode;
 	}
 
-	public String getMemo() {
+	public Memo getMemo() {
 		return memo;
 	}
 
-	public void setMemo(String memo) {
+	public void setMemo(Memo memo) {
 		this.memo = memo;
 	}
 
@@ -124,14 +128,4 @@ public class Property {
 		this.managedBy = managedBy;
 	}
 
-	@Override
-	public String toString() {
-		return "Property{" +
-				"id=" + id +
-				", address='" + address + '\'' +
-				", city='" + city + '\'' +
-				", state='" + state + '\'' +
-				", zipcode='" + zipcode + '\'' +
-				'}';
-	}
 }

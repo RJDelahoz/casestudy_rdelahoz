@@ -47,7 +47,7 @@ public class BaseController {
 		return "support";
 	}
 
-	@RequestMapping("/login")
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String getLoginPage() {
 		System.out.println("\n\nLogin Page\n\n");
 		return "login";

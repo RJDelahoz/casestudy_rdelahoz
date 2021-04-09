@@ -4,6 +4,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Entity
@@ -70,5 +71,16 @@ public class Memo {
 
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
+	}
+
+	@Override
+	public String toString() {
+		return "Memo{" +
+				"id=" + id +
+				", property=" + property +
+				", subject='" + subject + '\'' +
+				", content='" + content + '\'' +
+				", timestamp=" + timestamp +
+				'}';
 	}
 }

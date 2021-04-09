@@ -37,52 +37,17 @@ public class UserController {
 		String username = request.getUserPrincipal().getName();
 		String role = authentication.getAuthorities().toString();
 		User user = userService.getUserByUsername(username);
-		if (role.contains("ADMIN")) {
-			return new ModelAndView("redirect:/admin");
-		}
-
-		if (role.contains("MANAGER")) {
-			Optional<Organization> optionalOrganization =
-					organizationService.findByManagerUserName(username);
-
-			if (optionalOrganization.isPresent()) {
-				if (optionalOrganization.get().getProperties().isEmpty()) {
-					model.addAttribute("propertyForm", new Property());
-					return new ModelAndView("register-property");
-				} else {
-					model.addAttribute("orgPropertiesListBean",
-							optionalOrganization.get().getProperties());
-					optionalOrganization.get().getProperties().forEach(System.out::println);
-					return new ModelAndView("redirect:/properties");
-				}
-			}
-		} else if (role.contains("USER")) {
-			if (user.getProperty() == null) {
-				return new ModelAndView("request-access");
-			} else {
-				model.addAttribute("userProperty", user.getProperty());
-			}
-		}
 
 		model.addAttribute("authority", role);
-		model.addAttribute("welcomeMessage", HelperClass.greetingHelper(username));
-		return new ModelAndView("welcome");
-	}
-
-	@RequestMapping("/ticket-center")
-	public String ticketCenterHandler(Model model,
-									  HttpServletRequest request,
-									  Authentication authentication) {
-		String username = request.getUserPrincipal().getName();
-		String role = authentication.getAuthorities().toString();
-
-		User user = userService.getUserByUsername(username);
-		if (role.contains("MANAGER")) {
-			model.addAttribute("");
-		} else if (role.contains("USER")) {
-			System.out.println("THESE ARE THE TICKET REQUEST FOR ALL THE YOU ARE A PART OF.");
+		Property property = user.getProperty();
+		if (property == null) {
+			return new ModelAndView("request-access");
+		} else {
+			model.addAttribute("userProperty", property);
+			model.addAttribute("welcomeMessage", HelperClass.greetingHelper(username));
+			return new ModelAndView("redirect:/ViewProperty?id=" + property.getId());
 		}
-		return "ticket-center";
 	}
+
 
 }
