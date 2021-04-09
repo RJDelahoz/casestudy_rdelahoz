@@ -9,7 +9,6 @@ import com.app.service.PropertyService;
 import com.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
@@ -53,7 +51,6 @@ public class PropertyController {
 
 		User user = userService.getUserByUsername(username);
 		Organization organization = user.getOrganization();
-
 
 		Memo memo = new Memo();
 		memo.setSubject("GENERIC");
@@ -108,8 +105,6 @@ public class PropertyController {
 			return "properties";
 		}
 	}
-
-
 
 	@RequestMapping("/ViewProperty")
 	public String viewPropertyHandler(Model model,

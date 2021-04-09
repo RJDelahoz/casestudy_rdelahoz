@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -33,7 +32,6 @@ public class UserController {
 	public ModelAndView welcomeHandler(Model model,
 									   Authentication authentication,
 									   HttpServletRequest request) {
-
 		String username = request.getUserPrincipal().getName();
 		String role = authentication.getAuthorities().toString();
 		User user = userService.getUserByUsername(username);
