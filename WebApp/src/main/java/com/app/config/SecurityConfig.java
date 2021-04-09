@@ -22,6 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private final AccessDeniedHandler accessDeniedHandler;
 	private final CustomSuccessHandler customSuccessHandler;
 
+	@Autowired
 	public SecurityConfig(UserDetailsService userDetailsService, AccessDeniedHandler accessDeniedHandler,
 						  CustomSuccessHandler customSuccessHandler) {
 		this.userDetailsService = userDetailsService;
