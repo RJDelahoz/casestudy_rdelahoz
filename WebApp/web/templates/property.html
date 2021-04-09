@@ -23,7 +23,7 @@
             <ul class="navbar-nav align-items-center ml-auto">
                 <li class="nav-item mr-3" th:if="${authority} == '[MANAGER]'">
                     <a class="nav-link" role="button"
-                       th:href="@{/ticket-center/property(id=${property.getId()})}">
+                       th:href="@{/ticket-center(id=${property.getId()})}">
                         <div class="font-weight-500">
                             Ticket Center
                         </div>
@@ -31,7 +31,7 @@
                 </li>
                 <li class="nav-item mr-3" th:if="${authority} == '[USER]'">
                     <a class="nav-link" role="button"
-                       th:href="@{/ticket-center}">
+                       th:href="@{/tickets}">
                         <div class="font-weight-500">
                             Ticket Center
                         </div>
@@ -57,7 +57,6 @@
                                     <div class="page-header-subtitle" th:text="${property.getManagedBy().getName()}">
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -71,6 +70,7 @@
                             <div th:if="${authority == '[MANAGER]'}">
                                 <a class="btn btn-primary" type="button"
                                    th:href="@{/memo(id=${property.getId()})}" >
+                                    UPDATE MEMO
                                 </a>
                             </div>
                         </div>
@@ -78,8 +78,8 @@
                             <p class="post-content" th:text="${property.getMemo().getContent()}">
                             </p>
                         </div>
-                        <div class="card-footer">
-                            butt
+                        <div class="card-footer"
+                             th:text="${#dates.format(property.getMemo().getTimestamp(), 'MM-dd-yyyy HH:mm')}">
                         </div>
                     </div>
                 </div>
