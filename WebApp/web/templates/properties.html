@@ -15,15 +15,14 @@
         <link rel="stylesheet" th:href="@{css/user-layout-style.css}"/>
         <link rel="stylesheet" th:href="@{css/ticket-style.css}"/>
     </head>
-    <body class="bg-dark">
-        <nav class="topnav navbar navbar-expand justify-content-between navbar-dark">
-            <a class="navbar-brand" href="welcome.html">
-                PMP
-            </a>
-            <ul class="navbar-nav align-items-center ml-auto">
+
+    <body class="nav-fixed bg-dark">
+        <nav class="topnav navbar navbar-expand justify-content-between justify-content-sm-start navbar-dark bg-dark">
+            <a class="navbar-brand" href="index.html">PMP</a>
+            <ul class="navbar-nav ml-auto mr-lg-5">
                 <li class="nav-item mr-3">
                     <a class="nav-link" role="button">
-                        Work Order
+                        Register Property
                     </a>
                 </li>
                 <li class="nav-item mr-3 mr-lg-0">
@@ -33,110 +32,144 @@
                 </li>
             </ul>
         </nav>
-        <div id="layout_content">
-            <main>
-                <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
-                    <div class="container">
-                        <div class="page-header-content pt-4">
-                            <div class="row align-items-center justify-content-between">
-                                <div class="col-auto mt-4">
-                                    <h1 class="page-header-title" th:text="${message}">
-                                    </h1>
-                                    <div class="page-header-subtitle">
-                                        These properties belong to your organization.
+        <div id="layout">
+            <div id="layout_content">
+                <main>
+                    <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+                        <div class="container">
+                            <div class="page-header-content pt-4">
+                                <div class="row align-items-center justify-content-between">
+                                    <div class="col-auto mt-4">
+                                        <h1 class="page-header-title" th:text="${message}">
+                                        </h1>
+                                        <div class="page-header-subtitle">
+                                            These properties belong to your organization.
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-xl-auto mt-4" >
+                                       <a class="btn btn-secondary" type="button" th:href="@{/register-property}">
+                                           Register A New Property
+                                       </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                    <!-- Main page content-->
+                    <div class="container mt-n10">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="table">
+                                        <table class="table align-items-center table-flush">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th scope="col">
+                                                        id
+                                                    </th>
+                                                    <th scope="col">
+                                                        address
+                                                    </th>
+                                                    <th scope="col">
+                                                        city
+                                                    </th>
+                                                    <th scope="col">
+                                                        state
+                                                    </th>
+                                                    <th scope="col">
+                                                        zip
+                                                    </th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="property: ${propertySet}">
+                                                    <td style="vertical-align: middle"
+                                                        th:text="${property.getId()}">
+                                                    </td>
+                                                    <td style="vertical-align: middle"
+                                                        th:text="${property.getAddress()}">
+                                                    </td>
+                                                    <td style="vertical-align: middle"
+                                                        th:text="${property.getCity()}">
+                                                    </td>
+                                                    <td style="vertical-align: middle"
+                                                        th:text="${property.getState()}">
+                                                    </td>
+                                                    <td style="vertical-align: middle"
+                                                        th:text="${property.getZipcode()}">
+                                                    </td>
+                                                    <td>
+                                                        <div class="text-right d-flex">
+                                                            <div class="ml-4">
+                                                                <a class="btn btn-icon btn-green"
+                                                                   th:href="@{/ViewProperty(id=${property.getId()})}">
+                                                                    <img th:src="@{img/svg/eye.svg}"/>
+                                                                </a>
+                                                            </div>
+                                                            <div>
+                                                                <a class="ml-4 btn btn-icon btn-red"
+                                                                   th:href="@{/DeleteProperty(id=${property.getId()})}">
+                                                                    <img th:src="@{img/svg/trash-2.svg}"/>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="card-footer">
+                                        <nav aria-label="...">
+                                            <ul class="pagination justify-content-end mb-0">
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#">
+                                                        <
+                                                    </a>
+                                                </li>
+                                                <li class="page-item active">
+                                                    <a class="page-link" href="#">
+                                                        1
+                                                    </a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#">
+                                                        2
+                                                    </a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#">
+                                                        3
+                                                    </a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#">
+                                                        >
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </header>
-                <!-- Main page content-->
-                <div class="container mt-n10">
-                    <div class="row">
-                        <div class="col">
-                            <div class="card">
-                                <div class="table">
-                                    <table class="table align-items-center table-flush">
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th scope="col">
-                                                    id
-                                                </th>
-                                                <th scope="col">
-                                                    address
-                                                </th>
-                                                <th scope="col">
-                                                    city
-                                                </th>
-                                                <th scope="col">
-                                                    state
-                                                </th>
-                                                <th scope="col">
-                                                    zip
-                                                </th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr  th:each="property: ${propertySet}">
-                                                <td style="vertical-align: middle" th:text="${property.getId()}">
-                                                </td>
-                                                <td style="vertical-align: middle" th:text="${property.getAddress()}">
-                                                </td>
-                                                <td style="vertical-align: middle" th:text="${property.getCity()}">
-                                                </td>
-                                                <td style="vertical-align: middle" th:text="${property.getState()}">
-                                                </td>
-                                                <td style="vertical-align: middle" th:text="${property.getZipcode()}">
-                                                </td>
-                                                <td>
-                                                    <a class="btn ml-4 btn-icon btn-green"
-                                                       th:href="@{/ViewProperty(id=${property.getId()})}">
-                                                        <img th:src="@{img/svg/eye.svg}"/>
-                                                    </a>
-
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="card-footer" >
-                                    <nav aria-label="...">
-                                        <ul class="pagination justify-content-end mb-0">
-                                            <li class="page-item disabled">
-                                                <a class="page-link" href="#">
-                                                    <
-                                                </a>
-                                            </li>
-                                            <li class="page-item active">
-                                                <a class="page-link" href="#">
-                                                    1
-                                                </a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#">
-                                                    2
-                                                </a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#">
-                                                    3
-                                                </a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#">
-                                                    >
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
+                </main>
+                <footer class="footer mt-auto footer-light">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 small">
+                                Copyright © Your Website 2021
+                            </div>
+                            <div class="col-md-6 text-md-right small">
+                                <a href="#!">Privacy Policy</a>
+                                ·
+                                <a href="#!">Terms &amp; Conditions</a>
                             </div>
                         </div>
                     </div>
-                </div>
-            </main>
+                </footer>
+            </div>
         </div>
     </body>
-
 </html>

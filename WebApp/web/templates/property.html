@@ -1,10 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Welcome</title>
 
+        <!-- Bootstrap CSS -->
+        <link
+                rel="stylesheet"
+                href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+                integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+                crossorigin="anonymous"
+        />
+
+        <link rel="stylesheet" th:href="@{css/user-layout-style.css}"/>
+        <link rel="stylesheet" th:href="@{css/ticket-style.css}"/>
+    </head>
+    <body class="nav-fixed bg-dark">
+        <nav class="topnav navbar navbar-expand justify-content-between justify-content-sm-start navbar-dark bg-dark">
+            <a class="navbar-brand" href="index.html">PMP</a>
+            <ul class="navbar-nav align-items-center ml-auto">
+                <li class="nav-item mr-3" th:if="${authority} == '[MANAGER]'">
+                    <a class="nav-link" role="button"
+                       th:href="@{/ticket-center/property(id=${property.getId()})}">
+                        <div class="font-weight-500">
+                            Ticket Center
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item mr-3" th:if="${authority} == '[USER]'">
+                    <a class="nav-link" role="button"
+                       th:href="@{/ticket-center}">
+                        <div class="font-weight-500">
+                            Ticket Center
+                        </div>
+                    </a>
+                </li>
+
+                <li class="nav-item mr-3 mr-lg-0">
+                    <a class="btn font-weight-500 ml-lg-4 btn-primary" th:href="@{/logout}">
+                        Log Out
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div id="layout_content">
+            <main>
+                <header class="page-header page-header-dark bg-gradient-primary-to-secondary mt-5 pb-10">
+                    <div class="container">
+                        <div class="page-header-content pt-4">
+                            <div class="row align-items-center justify-content-between">
+                                <div class="col-auto mt-4">
+                                    <h1 class="page-header-title" th:text="${property.getAddress()}">
+                                    </h1>
+                                    <div class="page-header-subtitle" th:text="${property.getManagedBy().getName()}">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <!-- Main page content-->
+                <div class="container mt-n10">
+                    <div class="card col-lg-12">
+                        <div class="card-header justify-content-between d-flex">
+                            <h5 th:text="${property.getMemo().getSubject()}">
+                            </h5>
+                            <div th:if="${authority == '[MANAGER]'}">
+                                <a class="btn btn-primary" type="button"
+                                   th:href="@{/memo(id=${property.getId()})}" >
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p class="post-content" th:text="${property.getMemo().getContent()}">
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            butt
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+
+        <script th:src="@{js/scripts.js}"></script>
     </body>
 </html>

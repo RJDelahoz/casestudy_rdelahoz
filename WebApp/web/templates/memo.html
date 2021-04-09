@@ -26,22 +26,28 @@
                                         </h3>
                                     </div>
                                     <div class="card-body">
-                                        <form th:action="@{/joinProperty}" method="post">
+                                        <form th:action="@{/memo}" method="post">
                                             <fieldset>
                                                 <div class="form-group">
-                                                    <label class="small" for="orgName">
-                                                        Organization Name
+                                                    <label class="small" for="propertyId">
+                                                        Property CODE
                                                     </label>
-                                                    <input class="form-control" id="orgName" name="orgName" required/>
+                                                    <input class="form-control" id="propertyId" name="propertyId" th:value="${propertyId}" readonly/>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="small" for="address">
-                                                        Property Address
+                                                    <label class="small" for="subject">
+                                                        Subject
                                                     </label>
-                                                    <input class="form-control" id="address" name="address" required/>
+                                                    <input class="form-control" id="subject" name="subject" required/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="small" for="message">
+                                                        Message
+                                                    </label>
+                                                    <textarea class="form-control" cols="70" id="message" name="message" required></textarea>
                                                 </div>
                                                 <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                    <input type="submit" class="btn btn-primary" value="JOIN">
+                                                    <input type="submit" class="btn btn-primary" value="Update">
                                                 </div>
                                             </fieldset>
                                         </form>
@@ -49,7 +55,7 @@
                                     <div class="card-footer text-center">
                                         <div class="small">
                                             <a th:href="@{/register}">
-                                                Need an account? Lets get started!
+                                                Cancel
                                             </a>
                                         </div>
                                     </div>

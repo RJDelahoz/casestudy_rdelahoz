@@ -1,83 +1,76 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Tickets</title>
 
-		<!-- Bootstrap CSS -->
-		<link
-			rel="stylesheet"
-			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-			crossorigin="anonymous"
-		/>
+        <!-- Bootstrap CSS -->
+        <link
+                rel="stylesheet"
+                href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+                integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+                crossorigin="anonymous"
+        />
 
-		<link rel="stylesheet" th:href="@{css/user-layout-style.css}" />
-		<link rel="stylesheet" th:href="@{css/ticket-style.css}" />
-		
-	</head>
-	<body class="bg-dark">
-		<nav class="topnav navbar navbar-expand justify-content-between navbar-dark">
-			<a class="navbar-brand" href="welcome.html">
-                WebApp
-            </a>
-			<ul class="navbar-nav align-items-center ml-auto">
-				<li class="nav-item mr-3">
-					<a class="nav-link" role="button">
-						<div class="font-weight-500">Work Order</div>
-					</a>
-				</li>
-				<li class="nav-item mr-3 mr-lg-0">
-					<a class="btn font-weight-500 ml-lg-4 btn-primary" th:href="@{/logout}">
-						Log Out
-					</a>
-				</li>
-			</ul>
-		</nav>
+        <link rel="stylesheet" th:href="@{css/user-layout-style.css}"/>
+        <link rel="stylesheet" th:href="@{css/ticket-style.css}"/>
 
-		<div id="layout_content">
-			<main>
-                <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
-                    <div class="container">
-                        <div class="page-header-content pt-4">
-                            <div class="row align-items-center justify-content-between">
-                                <div class="col-auto mt-4">
-                                    <h1 class="page-header-title" th:text="${welcomeMessage}">
-                                    </h1>
-                                    <div th:if="${authority == '[MANAGER]'}">
-                                        <div  class="page-header-subtitle">
-                                            These are the properties you manage.
+    </head>
+    <body class="nav-fixed bg-dark">
+        <nav class="topnav navbar navbar-expand justify-content-between justify-content-sm-start navbar-dark bg-dark">
+            <a class="navbar-brand" href="index.html">PMP</a>
+            <ul class="navbar-nav ml-auto mr-lg-5">
+                <li class="nav-item mr-3">
+                    <a class="nav-link" role="button">
+                        Register Property
+                    </a>
+                </li>
+                <li class="nav-item mr-3 mr-lg-0">
+                    <a class="btn ml-lg-4 btn-primary" th:href="@{/logout}">
+                        Log Out
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div id="layout">
+            <div id="layout_content">
+                <main>
+                    <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+                        <div class="container">
+                            <div class="page-header-content pt-4">
+                                <div class="row align-items-center justify-content-between">
+                                    <div class="col-12 col-xl-auto mt-4">
+                                        <h2 th:if="${authority == '[MANAGER]'}">
+                                            PROPERTY TICKETS
+                                        </h2>
+                                        <div class="page-header-subtitle" th:if="${authority == '[MANAGER]'}">
+                                            ORG TICKETS
+                                        </div>
+                                        <h2 th:if="${authority == '[USER]'}"
+                                            th:text="${user.getProperty().getAddress()}">
+                                        </h2>
+                                        <div th:if="${authority == '[USER]'}" class="page-header-subtitle">
+                                            YOUR CURRENT TICKETS
                                         </div>
                                     </div>
-                                    <div th:if="${authority == '[USER]'}">
-                                        <div  class="page-header-subtitle" th:text="${userProperty.getAddress()}">
-                                        </div>
-                                    </div>
-                                </div>>
-                                <div class="col-12 col-xl-auto mt-4">
-                                    <h2 th:text="${userProperty.getManagedBy().getName()}">
-                                    </h2>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </header>
-				<!-- Main page content-->
-				<section class="py-10"> 
-					<div class="container mt-n10">
-						<div class="row">
+                    </header>
+                    <div class="container mt-n10">
+                        <div class="row">
                             <div class="col-lg-4 col-xl-3 mb-5">
                                 <div class="card">
                                     <div class="list-group list-group-flush small">
-                                        <a class="list-group-item list-group-item-action" href="#!">
+                                        <a class="list-group-item list-group-item-action" href="#">
                                             Make New Ticket
                                         </a>
-                                        <a class="list-group-item list-group-item-action" href="#!">
+                                        <a class="list-group-item list-group-item-action" href="#">
                                             View Open Tickets
                                         </a>
-                                        <a class="list-group-item list-group-item-action" href="#!">
+                                        <a class="list-group-item list-group-item-action" href="#">
                                             View Closed Tickets
                                         </a>
                                     </div>
@@ -94,9 +87,9 @@
                                                             Case #290225
                                                         </h6>
                                                         <p class="card-text">
-                                                            Thank you for using our service. This case is 
-                                                            now being marked as closed. If you would like 
-                                                            to reopen this case, please reply to this 
+                                                            Thank you for using our service. This case is
+                                                            now being marked as closed. If you would like
+                                                            to reopen this case, please reply to this
                                                             message.
                                                         </p>
                                                     </div>
@@ -117,9 +110,9 @@
                                                             Case #290234
                                                         </h6>
                                                         <p class="card-text">
-                                                            Your request has been declined. Thank you for using 
-                                                            our service. This case is now being marked as closed. 
-                                                            If you would like to reopen this case, please reply 
+                                                            Your request has been declined. Thank you for using
+                                                            our service. This case is now being marked as closed.
+                                                            If you would like to reopen this case, please reply
                                                             to this message.
                                                         </p>
                                                     </div>
@@ -140,15 +133,15 @@
                                                             Case #290194
                                                         </h6>
                                                         <p class="card-text">
-                                                            Your request has been approved. Thank you for using our 
-                                                            service. This case is now being marked as closed. If 
-                                                            you would like to reopen this case, please reply to this 
+                                                            Your request has been approved. Thank you for using our
+                                                            service. This case is now being marked as closed. If
+                                                            you would like to reopen this case, please reply to this
                                                             message.
                                                         </p>
                                                     </div>
                                                 </div>
                                                 <div class="small text-gray-400 flex-shrink-0 text-right">
-                                                    10:00 AM<br />
+                                                    10:00 AM<br/>
                                                     <div class="badge badge-green-soft badge-pill text-green">
                                                         Approved
                                                     </div>
@@ -163,15 +156,15 @@
                                                             Case #290127
                                                         </h6>
                                                         <p class="card-text">
-                                                            Your request has been approved. Thank you for using 
-                                                            our service. This case is now being marked as closed. 
-                                                            If you would like to reopen this case, please reply to 
+                                                            Your request has been approved. Thank you for using
+                                                            our service. This case is now being marked as closed.
+                                                            If you would like to reopen this case, please reply to
                                                             this message.
                                                         </p>
                                                     </div>
                                                 </div>
                                                 <div class="small">
-                                                    10:00 AM<br />
+                                                    10:00 AM<br/>
                                                     <div class="badge badge-yellow-soft badge-pill text-yellow">
                                                         Pending
                                                     </div>
@@ -186,15 +179,15 @@
                                                             Case #290078
                                                         </h6>
                                                         <p class="card-text">
-                                                            Your request has been approved. Thank you for using our 
-                                                            service. This case is now being marked as closed. If you 
-                                                            would like to reopen this case, please reply to this 
+                                                            Your request has been approved. Thank you for using our
+                                                            service. This case is now being marked as closed. If you
+                                                            would like to reopen this case, please reply to this
                                                             message.
                                                         </p>
                                                     </div>
                                                 </div>
                                                 <div class="small">
-                                                    10:00 AM<br />
+                                                    10:00 AM<br/>
                                                     <div class="badge badge-yellow-soft badge-pill text-yellow">
                                                         Pending
                                                     </div>
@@ -205,28 +198,41 @@
                                 </div>
                             </div>
                         </div>
-					</div>
-				</section>
-				
-			</main>
-		</div>
+                    </div>
+                </main>
+                <footer class="footer mt-auto footer-light">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 small">
+                                Copyright © Your Website 2021
+                            </div>
+                            <div class="col-md-6 text-md-right small">
+                                <a href="#!">Privacy Policy</a>
+                                ·
+                                <a href="#!">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
 
-		<!-- Optional JavaScript -->
-		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-		<script
-			src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-			crossorigin="anonymous"
-		></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-			crossorigin="anonymous"
-		></script>
-		<script
-			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-			crossorigin="anonymous"
-		></script>
-	</body>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script
+                src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous"
+        ></script>
+        <script
+                src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"
+        ></script>
+        <script
+                src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"
+        ></script>
+    </body>
 </html>
