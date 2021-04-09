@@ -20,11 +20,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private final UserDetailsService userDetailsService;
 	private final AccessDeniedHandler accessDeniedHandler;
+	private final CustomSuccessHandler customSuccessHandler;
 
-	@Autowired
-	public SecurityConfig(UserDetailsService userDetailsService, AccessDeniedHandler accessDeniedHandler) {
+	public SecurityConfig(UserDetailsService userDetailsService, AccessDeniedHandler accessDeniedHandler,
+						  CustomSuccessHandler customSuccessHandler) {
 		this.userDetailsService = userDetailsService;
 		this.accessDeniedHandler = accessDeniedHandler;
+		this.customSuccessHandler = customSuccessHandler;
 	}
 
 	@Bean
@@ -52,7 +54,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/password-recovery").permitAll()
 				.antMatchers("/contactus").permitAll()
 				.antMatchers("/welcome").hasAnyAuthority("ADMIN", "MANAGER" ,"USER")
-				.antMatchers("/ticket-center/**").hasAnyAuthority("MANAGER", "USER")
+				.antMatchers("/ticket-center").hasAnyAuthority("USER", "MANAGER")
+				.antMatchers("/ticket-center/property").hasAnyAuthority("MANAGER")
 				.antMatchers("/property").hasAnyAuthority("MANAGER")
 				.antMatchers("/properties").hasAnyAuthority("MANAGER")
 				.antMatchers("/joinProperty").hasAnyAuthority("USER")
@@ -60,9 +63,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.anyRequest().authenticated()
 				.and()
 				.formLogin().loginPage("/login")
-				.loginProcessingUrl("/loginAction")
-				.usernameParameter("username").passwordParameter("password")
-				.defaultSuccessUrl("/welcome", false).permitAll()
+				.loginProcessingUrl("/loginAction").usernameParameter("username").passwordParameter("password")
+				.successHandler(customSuccessHandler).permitAll()
 				.and()
 				.logout().logoutSuccessUrl("/").permitAll()
 				.and()
