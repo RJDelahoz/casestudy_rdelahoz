@@ -56,26 +56,26 @@
                     <div class="container mt-n10">
                         <div class="row">
                             <div class="col-lg-4 col-xl-3 mb-5">
-                                <div class="card">
+                                <div class="card bg-transparent">
                                     <div class="list-group list-group-flush small">
-                                        <a class="list-group-item list-group-item-action" href="#">
+                                        <a class="list-group-item list-group-item-action mb-1" href="#">
                                             Make New Ticket
                                         </a>
-                                        <a class="list-group-item list-group-item-action" href="#">
+                                        <a class="list-group-item list-group-item-action mb-1" href="#">
                                             View Open Tickets
                                         </a>
-                                        <a class="list-group-item list-group-item-action" href="#">
+                                        <a class="list-group-item list-group-item-action mb-1" href="#">
                                             View Closed Tickets
                                         </a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-8 col-lg-9">
-                                <div class="card">
-                                    <div th:each="ticket : ${propertyTickets}"
-                                         class="list-group list-group-flush" >
+                                <div class="card bg-transparent mb-5">
+                                    <div th:each="ticket : ${userTickets}"
+                                         class="list-group list-group-flush">
                                         <a th:href="@{/ViewTicket(id=${ticket.getId()})}"
-                                           class="list-group-item list-group-item-action py-4">
+                                           class="list-group-item list-group-item-action py-4 mb-4">
                                             <div class="d-flex justify-content-between">
                                                 <div class="mr-4 d-flex">
                                                     <div>
@@ -96,6 +96,21 @@
                                         </a>
                                     </div>
                                 </div>
+                                <div class="card">
+                                    <div class="card-header">
+                                        Create New Ticket
+                                    </div>
+                                    <div class="card-body">
+                                        <form th:action="@{/ticketAction}" method="post">
+                                            <textarea class="form-control mb-2" rows="4" th:name="description"
+                                                      placeholder="Default status or ticket will be open until review by management"></textarea>
+                                            <input class="btn btn-primary btn-sm mr-2" type="submit" value="Create Ticket"/>
+                                        </form>
+                                        <button class="btn btn-light btn-sm mr-2">
+                                            Attach a File
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -107,9 +122,9 @@
                                 Copyright © Your Website 2021
                             </div>
                             <div class="col-md-6 text-md-right small">
-                                <span>Privacy Policy</span>
-                                -
-                                <span>Terms &amp; Conditions</span>
+                                <a href="#!">Privacy Policy</a>
+                                ·
+                                <a href="#!">Terms &amp; Conditions</a>
                             </div>
                         </div>
                     </div>

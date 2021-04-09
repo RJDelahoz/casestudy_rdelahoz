@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Properties</title>
+
+        <!-- Bootstrap CSS -->
+        <link
+                rel="stylesheet"
+                href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+                integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+                crossorigin="anonymous"
+        />
+
+        <link rel="stylesheet" th:href="@{css/user-layout-style.css}"/>
+        <link rel="stylesheet" th:href="@{css/ticket-style.css}"/>
+    </head>
+    <body class="nav-fixed bg-dark">
+        <nav class="topnav navbar navbar-expand justify-content-between justify-content-sm-start navbar-dark bg-dark">
+            <a class="navbar-brand" href="index.html">PMP</a>
+            <ul class="navbar-nav ml-auto mr-lg-5">
+                <li class="nav-item mr-3">
+                    <a class="nav-link" role="button">
+                        Register Property
+                    </a>
+                </li>
+                <li class="nav-item mr-3 mr-lg-0">
+                    <a class="btn ml-lg-4 btn-primary" th:href="@{/logout}">
+                        Log Out
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div id="layout">
+            <div id="layout_content">
+                <main>
+                    <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+                        <div class="container">
+                            <div class="page-header-content pt-4">
+                                <div class="row align-items-center justify-content-between">
+                                    <div class="col-12 col-xl-auto mt-4">
+                                        <h2>
+                                            PROPERTY TICKETS
+                                        </h2>
+                                        <div class="page-header-subtitle">
+                                            ORG TICKETS
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="container mt-n10">
+                        <div class="row">
+                            <div class="col-lg-4 col-xl-3 mb-5">
+                                <div class="card">
+                                    <div class="list-group list-group-flush small">
+                                        <div class="list-group list-group-flush small">
+                                            <a class="list-group-item list-group-item-action" href="#">
+                                                Make New Ticket
+                                            </a>
+                                            <a th:if="${authority == '[MANAGER]'}"
+                                               class="list-group-item list-group-item-action"
+                                               th:href="@{/ticket-center(id = ${ticket.getProperty().getId()})}">
+                                                View Open Tickets
+                                            </a>
+                                            <a th:if="${authority == '[USER]'}"
+                                               class="list-group-item list-group-item-action"
+                                               th:href="@{/tickets(id = ${ticket.getCreatedBy().getId()})}">
+                                                View Open Tickets
+                                            </a>
+                                            <a class="list-group-item list-group-item-action" href="#">
+                                                View Closed Tickets
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-xl-9">
+                                <div class="d-flex align-items-center justify-content-between flex-column flex-md-row">
+                                    <h2 class="mb-0" th:text="${ticket.getProperty().getAddress()}">
+                                    </h2>
+                                    <div class="h5">
+                                <span class="badge badge-warning-soft text-warning font-weight-normal"
+                                      th:text="${ticket.getStatus()}">
+                                </span>
+                                    </div>
+                                </div>
+                                <hr class="mb-4">
+                                <div class="card mb-5">
+                                    <div class="card-header d-flex justify-content-between">
+                                        <div class="mr-2 text-dark">
+                                    <span>
+                                        <span th:text="${ticket.getCreatedBy().getfName()}"></span> <span
+                                            th:text="${ticket.getCreatedBy().getlName()}"></span>
+                                    </span>
+                                            <div class="text-xs text-muted" th:text="${ticket.getTimestamp()}">
+                                            </div>
+                                        </div>
+                                        <a href="#">
+                                            #<span th:text="${ticket.getId()}"></span>
+                                        </a>
+                                    </div>
+                                    <div class="card-body" th:text="${ticket.getDescription()}">
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header">Add Reply</div>
+                                    <div class="card-body">
+                                        <textarea class="form-control mb-2" rows="4" required></textarea>
+                                        <button class="btn btn-primary btn-sm mr-2">
+                                            Add Reply
+                                        </button>
+                                        <button class="btn btn-secondary bg-secondary btn-sm mr-2">
+                                            Attach a File
+                                        </button>
+                                        <div class="d-inline" th:if="${authority == '[MANAGER]'}">
+                                            <a class="btn btn-danger btn-sm"
+                                               th:if="${ticket.getStatus() == 'OPEN'}"
+                                               th:href="@{/UpdateStatus(id=${ticket.getId()})}">
+                                                Mark Closed
+                                            </a>
+                                            <a class="btn btn-success btn-sm"
+                                               th:if="${ticket.getStatus() == 'CLOSED'}"
+                                               th:href="@{/UpdateStatus(id=${ticket.getId()})}">
+                                                Mark Open
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+
+        <script th:src="@{js/scripts.js}"></script>
+    </body>
+</html>

@@ -498,6 +498,10 @@ button.bg-dark:focus,
 button.bg-dark:hover {
 	background-color: #0d0f13 !important;
 }
+
+.bg-transparent {
+	color: rgba(0, 0, 0, 0);
+}
 .justify-content-start {
 	justify-content: flex-start !important;
 }
