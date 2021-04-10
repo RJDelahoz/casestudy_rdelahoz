@@ -19,7 +19,9 @@
     </head>
     <body class="nav-fixed bg-dark">
         <nav class="topnav navbar navbar-expand justify-content-between justify-content-sm-start navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.html">PMP</a>
+            <a class="navbar-brand" th:href="@{/properties}">
+                PMP
+            </a>
             <ul class="navbar-nav align-items-center ml-auto">
                 <li class="nav-item mr-3" th:if="${authority} == '[MANAGER]'">
                     <a class="nav-link" role="button"
@@ -31,13 +33,12 @@
                 </li>
                 <li class="nav-item mr-3" th:if="${authority} == '[USER]'">
                     <a class="nav-link" role="button"
-                       th:href="@{/tickets}">
+                       th:href="@{/my-tickets}">
                         <div class="font-weight-500">
                             Ticket Center
                         </div>
                     </a>
                 </li>
-
                 <li class="nav-item mr-3 mr-lg-0">
                     <a class="btn font-weight-500 ml-lg-4 btn-primary" th:href="@{/logout}">
                         Log Out

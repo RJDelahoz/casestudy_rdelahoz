@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -29,21 +30,22 @@ public class UserController {
 	}
 
 	@RequestMapping("/welcome")
-	public ModelAndView welcomeHandler(Model model,
+	public String welcomeHandler(Model model,
 									   Authentication authentication,
 									   HttpServletRequest request) {
-		String username = request.getUserPrincipal().getName();
-		String role = authentication.getAuthorities().toString();
-		User user = userService.getUserByUsername(username);
+		String[] credentials = HelperClass.getUsernameAndRole(request, authentication);
+		User user = userService.getUserByUsername(credentials[0]);
+		String role = credentials[1];
 
-		model.addAttribute("authority", role);
 		Property property = user.getProperty();
-		if (property == null) {
-			return new ModelAndView("request-access");
+		if (property != null) {
+			model.addAttribute("authority", role);
+			model.addAttribute("user", user);
+			model.addAttribute("property", property);
+
+			return "property";
 		} else {
-			model.addAttribute("userProperty", property);
-			model.addAttribute("welcomeMessage", HelperClass.greetingHelper(username));
-			return new ModelAndView("redirect:/ViewProperty?id=" + property.getId());
+			return "request-access";
 		}
 	}
 
