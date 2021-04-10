@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <meta charset="UTF-8">
-        <title>Request Access</title>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=\, initial-scale=1.0"/>
+        <title>Memo</title>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet"
@@ -10,20 +12,42 @@
               integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
               crossorigin="anonymous"/>
 
+        <link rel="stylesheet" th:href="@{css/user-layout-style.css}"/>
         <link rel="stylesheet" th:href="@{css/auth-style.css}"/>
     </head>
     <body>
-        <div id="layoutAuthentication" class="bg-dark">
+        <div id="layoutAuthentication" class="bg-gradient-primary-to-secondary">
+            <!-- Navbar-->
+            <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+                <div class="container">
+                    <a class="navbar-brand" href="#">
+                        PMP
+                    </a>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto mr-lg-5">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/view-property(id=${propertyId})}">
+                                    Announcement
+                                </a>
+                            </li>
+                        </ul>
+                        <a class="btn font-weight-500 ml-lg-4 btn-primary" th:href="@{/logout}">
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </nav>
             <div id="layoutAuthentication_content">
                 <main>
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
+                                <!-- Basic login form-->
                                 <div class="card mt-5">
-                                    <div class="card-header justify-content-center">
-                                        <h3 class="my-4">
-                                            Join property
-                                        </h3>
+                                    <div class="card-header justify-content-center bg-dark">
+                                        <h2 class="my-4 text-light">
+                                            Memorandum
+                                        </h2>
                                     </div>
                                     <div class="card-body">
                                         <form th:action="@{/memo}" method="post">
@@ -44,7 +68,7 @@
                                                     <label class="small" for="message">
                                                         Message
                                                     </label>
-                                                    <textarea class="form-control" cols="70" id="message" name="message" required></textarea>
+                                                    <textarea class="form-control" cols="70" th:wrap="physical" id="message" name="message" required></textarea>
                                                 </div>
                                                 <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                                     <input type="submit" class="btn btn-primary" value="Update">
@@ -52,11 +76,10 @@
                                             </fieldset>
                                         </form>
                                     </div>
-                                    <div class="card-footer text-center">
-                                        <div class="small">
-                                            <a th:href="@{/register}">
-                                                Cancel
-                                            </a>
+                                    <div class="card-footer text-left bg-dark">
+                                        <div class="small text-white">
+                                            This is require to proceed! <br/>
+                                            Don't have this information get into contact with your buildings board.
                                         </div>
                                     </div>
                                 </div>
@@ -65,6 +88,32 @@
                     </div>
                 </main>
             </div>
+            <div id="layout_footer">
+                <footer class="footer pt-5 pb-3 mt-5 bg-dark footer-dark">
+                    <div class="container">
+                        <hr/>
+                        <div class="row align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; Case study 2021</div>
+                            <div class="col-md-6 text-md-right small">
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
         </div>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
     </body>
 </html>

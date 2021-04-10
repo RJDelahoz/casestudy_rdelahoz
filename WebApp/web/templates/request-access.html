@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <meta charset="UTF-8">
-        <title>Request Access</title>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=\, initial-scale=1.0"/>
+        <title>Login</title>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet"
@@ -10,20 +12,42 @@
               integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
               crossorigin="anonymous"/>
 
+        <link rel="stylesheet" th:href="@{css/user-layout-style.css}"/>
         <link rel="stylesheet" th:href="@{css/auth-style.css}"/>
     </head>
     <body>
-        <div id="layoutAuthentication" class="bg-dark">
+        <div id="layoutAuthentication" class="bg-gradient-primary-to-secondary">
+            <!-- Navbar-->
+            <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+                <div class="container">
+                    <a class="navbar-brand" th:href="@{/}">
+                        PMP
+                    </a>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto mr-lg-5">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/contactus}">
+                                    Support
+                                </a>
+                            </li>
+                        </ul>
+                        <a class="btn font-weight-500 ml-lg-4 btn-primary" th:href="@{/logout}">
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </nav>
             <div id="layoutAuthentication_content">
                 <main>
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
+                                <!-- Basic login form-->
                                 <div class="card mt-5">
-                                    <div class="card-header justify-content-center">
-                                        <h3 class="my-4">
-                                            Join property
-                                        </h3>
+                                    <div class="card-header justify-content-center bg-dark">
+                                        <h2 class="my-4 text-light">
+                                            Request Access
+                                        </h2>
                                     </div>
                                     <div class="card-body">
                                         <form th:action="@{/joinProperty}" method="post">
@@ -46,11 +70,10 @@
                                             </fieldset>
                                         </form>
                                     </div>
-                                    <div class="card-footer text-center">
-                                        <div class="small">
-                                            <a th:href="@{/register}">
-                                                Need an account? Lets get started!
-                                            </a>
+                                    <div class="card-footer text-left bg-dark">
+                                        <div class="small text-white">
+                                            Don't have this information? <br/>
+                                            Get in contact with your buildings board.
                                         </div>
                                     </div>
                                 </div>
@@ -59,6 +82,57 @@
                     </div>
                 </main>
             </div>
+            <div id="layout_footer">
+                <footer class="footer pt-5 pb-3 mt-5 bg-dark footer-dark">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="footer-brand">WebApp</div>
+                                <div class="mb-3">Lorem Ipsum</div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                                        <div class="text-uppercase-expanded text-xs mb-4">Welcome</div>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2"><a href="#">Home</a></li>
+                                            <li class="mb-2"><a href="#">Support</a></li>
+                                            <li class="mb-2"><a href="#">Get Started</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="text-uppercase-expanded text-xs mb-4">Legal</div>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2"><a href="#">Privacy Policy</a></li>
+                                            <li class="mb-2"><a href="#">Terms and Conditions</a></li>
+                                        </ul>
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
+                        <hr class="my-5"/>
+                        <div class="row align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; Case study 2021</div>
+                            <div class="col-md-6 text-md-right small">
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
         </div>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
     </body>
 </html>

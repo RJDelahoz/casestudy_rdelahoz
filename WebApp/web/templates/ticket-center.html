@@ -16,7 +16,6 @@
 
         <link rel="stylesheet" th:href="@{css/user-layout-style.css}"/>
         <link rel="stylesheet" th:href="@{css/ticket-style.css}"/>
-
     </head>
     <body class="nav-fixed bg-dark">
         <nav class="topnav navbar navbar-expand justify-content-between justify-content-sm-start navbar-dark bg-dark">
@@ -74,6 +73,21 @@
                             </div>
                             <div class="col-lg-8 col-lg-9">
                                 <div class="card bg-transparent mb-5">
+                                    <div th:if="${propertyTickets.isEmpty()}"  class="list-group list-group-flush">
+                                        <a href="#"
+                                           class="list-group-item list-group-item-action py-4 mb-4">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="mr-4 d-flex">
+                                                    <div>
+                                                        <h2>
+                                                            There are currently no open tickets!<br/>
+                                                            Keep up the good work! :)
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
                                     <div th:each="ticket : ${propertyTickets}"
                                          class="list-group list-group-flush">
                                         <a th:href="@{/ticket(id=${ticket.getId()})}"

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=\, initial-scale=1.0" />
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=\, initial-scale=1.0"/>
         <title>Register</title>
 
         <!-- Bootstrap CSS -->
@@ -12,23 +12,45 @@
               integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
               crossorigin="anonymous"/>
 
+        <link rel="stylesheet" th:href="@{css/user-layout-style.css}"/>
         <link rel="stylesheet" th:href="@{css/auth-style.css}"/>
     </head>
     <body>
-        <div id="layoutAuthentication" class="bg-dark">
+        <div id="layoutAuthentication" class="bg-gradient-primary-to-secondary">
+            <!-- Navbar-->
+            <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+                <div class="container">
+                    <a class="navbar-brand" href="#">
+                        PMP
+                    </a>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto mr-lg-5">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/contactus}">
+                                    Support
+                                </a>
+                            </li>
+                        </ul>
+                        <a class="btn font-weight-500 ml-lg-4 btn-primary" th:href="@{/logout}">
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </nav>
             <div id="layoutAuthentication_content">
                 <main>
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-7">
                                 <div class="card mt-5">
-                                    <div class="card-header justify-content-center">
-                                        <h3 class="my-4">
+                                    <div class="card-header justify-content-center bg-dark">
+                                        <h3 class="my-4 text-white">
                                             Register Property
                                         </h3>
                                     </div>
                                     <div class="card-body">
-                                        <form th:action="@{/register-property}" th:object="${propertyForm}" method="POST">
+                                        <form th:action="@{/register-property}" th:object="${propertyForm}"
+                                              method="POST">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="address">
                                                     Address Line
@@ -42,7 +64,7 @@
                                                         City
                                                     </label>
                                                     <input class="form-control" id="city" th:name="city" type="text"
-                                                           placeholder="City" required />
+                                                           placeholder="City" required/>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label class="small mb-1" for="state">
@@ -55,29 +77,29 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
                                                     <label class="small mb-1" for="zipcode">
-                                                       Zipcode
+                                                        Zipcode
                                                     </label>
-                                                    <input class="form-control" id="zipcode" th:name="zipcode" type="text"
+                                                    <input class="form-control" id="zipcode" th:name="zipcode"
+                                                           type="text"
                                                            placeholder="zipcode"/>
                                                 </div>
                                             </div>
-                                             <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label class="small mb-1" for="message">
-                                                       Welcome Message
-                                                    </label>
-                                                    <textarea class="form-control" id="message" th:name="message"
-                                                           placeholder="Place holder message for your property."></textarea>
-                                                </div>
+                                            <div class="form-row">
+                                                    <textarea class="mb-2" rows="4" th:name="message"
+                                                              th:wrap="physical"
+                                                              placeholder="Default status or ticket will be open until review by management"></textarea>
+
                                             </div>
-                                            <div class="form-group mt-4 mb-0">
+                                            <div class="form-group mt-2 mb-0 col-md-2">
                                                 <input class="btn btn-primary btn-block" type="submit" value="GO"/>
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="card-footer text-center">
+                                    <div class="card-footer text-center bg-dark">
                                         <div class="small">
-                                            Errors and stuff
+                                            <a href="">
+                                                Already have an account? Lets login!
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -85,6 +107,23 @@
                         </div>
                     </div>
                 </main>
+            </div>
+            <div id="layout_footer">
+                <footer class="footer  bg-dark footer-dark">
+                    <div class="container">
+                        <hr class="my-5"/>
+                        <div class="row align-items-center">
+                            <div class="col-md-6 small">
+                                CASESTUDY 2021
+                            </div>
+                            <div class="col-md-6 text-md-right small">
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
             </div>
         </div>
         <!-- Optional JavaScript -->
