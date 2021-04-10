@@ -4,7 +4,7 @@
         <meta charset="UTF-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Tickets</title>
+        <title>Closed Tickets</title>
 
         <!-- Bootstrap CSS -->
         <link
@@ -23,8 +23,9 @@
             <a class="navbar-brand" href="index.html">PMP</a>
             <ul class="navbar-nav ml-auto mr-lg-5">
                 <li class="nav-item mr-3">
-                    <a class="nav-link" role="button">
-                        Register Property
+                    <a class="nav-link" role="button"
+                       th:href="@{/view-property(id=${propertyId})}">
+                        Announcement
                     </a>
                 </li>
                 <li class="nav-item mr-3 mr-lg-0">
@@ -42,11 +43,10 @@
                             <div class="page-header-content pt-4">
                                 <div class="row align-items-center justify-content-between">
                                     <div class="col-12 col-xl-auto mt-4">
-                                        <h2>
-                                            PROPERTY TICKETS
+                                        <h2 class="text-white" th:text="${propertyAddress}">
                                         </h2>
-                                        <div class="page-header-subtitle">
-                                            ORG TICKETS
+                                        <div class="page-header-subtitle" >
+                                            <b>Closed</b> tickets belonging to this property.
                                         </div>
                                     </div>
                                 </div>
@@ -58,25 +58,27 @@
                             <div class="col-lg-4 col-xl-3 mb-5">
                                 <div class="card bg-transparent">
                                     <div class="list-group list-group-flush small">
-                                        <a class="list-group-item list-group-item-action mb-2" href="#">
+                                        <a class="list-group-item list-group-item-action mb-1"
+                                           href="#">
+                                            Manage users in community
+                                        </a>
+                                        <a class="list-group-item list-group-item-action mb-1"
+                                           th:href="@{/ticket-center(id = ${propertyId})}">
                                             View Open Tickets
                                         </a>
-                                        <a class="list-group-item list-group-item-action mb-2"
-                                           href="#">
-                                            Manage Users
-                                        </a>
-                                        <a class="list-group-item list-group-item-action mb-2" href="#">
+                                        <a class="list-group-item list-group-item-action"
+                                           th:href="@{/ticket-center-closed(id = ${propertyId})}">
                                             View Closed Tickets
                                         </a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-8 col-lg-9">
-                                <div class="card">
+                                <div class="card bg-transparent mb-5">
                                     <div th:each="ticket : ${propertyTickets}"
-                                         class="list-group list-group-flush" >
-                                        <a th:href="@{/ViewTicket(id=${ticket.getId()})}"
-                                           class="list-group-item list-group-item-action py-4">
+                                         class="list-group list-group-flush">
+                                        <a th:href="@{/ticket(id=${ticket.getId()})}"
+                                           class="list-group-item list-group-item-action py-4 mb-4">
                                             <div class="d-flex justify-content-between">
                                                 <div class="mr-4 d-flex">
                                                     <div>
@@ -89,7 +91,7 @@
                                                 </div>
                                                 <div class="small">
                                                     <span th:text="${ticket.getTimestamp().toString()}"></span>
-                                                    <div class="badge badge-green-soft badge-pill text-green"
+                                                    <div class="badge badge-red-soft badge-pill text-red"
                                                          th:text="${ticket.getStatus()}">
                                                     </div>
                                                 </div>
@@ -104,13 +106,13 @@
                 <footer class="footer mt-auto footer-light">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-6 small">
-                                Copyright © Your Website 2021
+                            <div class="col-md-6 small text-white">
+                                CASESTUDY 2021
                             </div>
                             <div class="col-md-6 text-md-right small">
-                                <span>Privacy Policy</span>
-                                -
-                                <span>Terms &amp; Conditions</span>
+                                <a href="#">Privacy Policy</a>
+                                ·
+                                <a href="#">Terms &amp; Conditions</a>
                             </div>
                         </div>
                     </div>

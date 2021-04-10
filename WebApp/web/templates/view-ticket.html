@@ -17,11 +17,20 @@
     </head>
     <body class="nav-fixed bg-dark">
         <nav class="topnav navbar navbar-expand justify-content-between justify-content-sm-start navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.html">PMP</a>
+            <a class="navbar-brand" href="#">PMP</a>
             <ul class="navbar-nav ml-auto mr-lg-5">
                 <li class="nav-item mr-3">
-                    <a class="nav-link" role="button">
-                        Register Property
+                    <a th:if="${authority == '[MANAGER]'}"
+                       th:href="@{/view-property(id=${ticket.getProperty().getId()})}"
+                       class="nav-link"
+                       role="button">
+                        Property
+                    </a>
+                    <a th:if="${authority == '[USER]'}"
+                       th:href="@{/welcome}"
+                       class="nav-link"
+                       role="button">
+                        Announcements
                     </a>
                 </li>
                 <li class="nav-item mr-3 mr-lg-0">
@@ -39,7 +48,7 @@
                             <div class="page-header-content pt-4">
                                 <div class="row align-items-center justify-content-between">
                                     <div class="col-12 col-xl-auto mt-4">
-                                        <h2>
+                                        <h2 class="text-white">
                                             PROPERTY TICKETS
                                         </h2>
                                         <div class="page-header-subtitle">
@@ -53,23 +62,31 @@
                     <div class="container mt-n10">
                         <div class="row">
                             <div class="col-lg-4 col-xl-3 mb-5">
-                                <div class="card">
-                                    <div class="list-group list-group-flush small">
+                                <div class="card bg-transparent">
+                                    <div class="list-group list-group-flush small" th:if="${authority == '[MANAGER]'}">
                                         <div class="list-group list-group-flush small">
-                                            <a class="list-group-item list-group-item-action" href="#">
-                                                Make New Ticket
+                                            <a class="list-group-item list-group-item-action mb-1"
+                                               th:href="@{/ticket-center(id = ${ticket.getProperty().getId()})}">
+                                                Manage users in community
                                             </a>
-                                            <a th:if="${authority == '[MANAGER]'}"
-                                               class="list-group-item list-group-item-action"
+                                            <a class="list-group-item list-group-item-action mb-1"
                                                th:href="@{/ticket-center(id = ${ticket.getProperty().getId()})}">
                                                 View Open Tickets
                                             </a>
-                                            <a th:if="${authority == '[USER]'}"
-                                               class="list-group-item list-group-item-action"
-                                               th:href="@{/tickets(id = ${ticket.getCreatedBy().getId()})}">
+                                            <a class="list-group-item list-group-item-action"
+                                               th:href="@{/ticket-center-closed(id = ${ticket.getProperty().getId()})}">
+                                                View Closed Tickets
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="list-group list-group-flush small" th:if="${authority == '[USER]'}">
+                                        <div class="list-group list-group-flush small">
+                                            <a class="list-group-item list-group-item-action mb-1"
+                                               th:href="@{/my-tickets}">
                                                 View Open Tickets
                                             </a>
-                                            <a class="list-group-item list-group-item-action" href="#">
+                                            <a class="list-group-item list-group-item-action"
+                                               th:href="@{/my-tickets-closed}">
                                                 View Closed Tickets
                                             </a>
                                         </div>
@@ -78,7 +95,7 @@
                             </div>
                             <div class="col-lg-8 col-xl-9">
                                 <div class="d-flex align-items-center justify-content-between flex-column flex-md-row">
-                                    <h2 class="mb-0" th:text="${ticket.getProperty().getAddress()}">
+                                    <h2 class="mb-0 text-white" th:text="${ticket.getProperty().getAddress()}">
                                     </h2>
                                     <div class="h5">
                                 <span class="badge badge-warning-soft text-warning font-weight-normal"
@@ -117,12 +134,12 @@
                                         <div class="d-inline" th:if="${authority == '[MANAGER]'}">
                                             <a class="btn btn-danger btn-sm"
                                                th:if="${ticket.getStatus() == 'OPEN'}"
-                                               th:href="@{/UpdateStatus(id=${ticket.getId()})}">
+                                               th:href="@{/update-ticket-status(id=${ticket.getId()})}">
                                                 Mark Closed
                                             </a>
                                             <a class="btn btn-success btn-sm"
                                                th:if="${ticket.getStatus() == 'CLOSED'}"
-                                               th:href="@{/UpdateStatus(id=${ticket.getId()})}">
+                                               th:href="@{/update-ticket-status(id=${ticket.getId()})}">
                                                 Mark Open
                                             </a>
                                         </div>

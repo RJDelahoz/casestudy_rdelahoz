@@ -34,27 +34,41 @@ public class TicketController {
 		this.ticketService = ticketService;
 	}
 
-	@RequestMapping("/tickets")
-	public String userTicketCenterHandler(Model model,
+	@RequestMapping("/my-tickets")
+	public String userOpenTicketsHandler(Model model,
 										  HttpServletRequest request,
 										  Authentication authentication) {
 		String[] credentials = HelperClass.getUsernameAndRole(request, authentication);
 
 		User user = userService.getUserByUsername(credentials[0]);
 		String role = credentials[1];
-		if (role.contains("USER")) {
-			System.out.println("GRABBING TICKETS FROM USER");
-			Set<Ticket> tickets = user.getTickets();
+		List<Ticket> tickets = ticketService.getAllOpenTicketsCreatedByUser(user);
 
-			model.addAttribute("user", user);
-			model.addAttribute("authority", role);
-			model.addAttribute("userTickets", tickets);
-		}
+		model.addAttribute("user", user);
+		model.addAttribute("authority", role);
+		model.addAttribute("userTickets", tickets);
+
 		return "tickets";
+	}
+	@RequestMapping("/my-tickets-closed")
+	public String userClosedTicketsHandler(Model model,
+										  HttpServletRequest request,
+										  Authentication authentication) {
+		String[] credentials = HelperClass.getUsernameAndRole(request, authentication);
+
+		User user = userService.getUserByUsername(credentials[0]);
+		String role = credentials[1];
+		List<Ticket> tickets = ticketService.getAllClosedTicketsCreatedByUser(user);
+
+		model.addAttribute("user", user);
+		model.addAttribute("authority", role);
+		model.addAttribute("userTickets", tickets);
+
+		return "tickets-closed";
 	}
 
 	@RequestMapping("/ticket-center")
-	public String managerTicketCenterHandler(Model model,
+	public String managerOpenTicketCenterHandler(Model model,
 											 HttpServletRequest request,
 											 Authentication authentication,
 											 @RequestParam("id") long id) {
@@ -66,13 +80,36 @@ public class TicketController {
 		List<Ticket> tickets = ticketService.getAllOpenTicketsFromProperty(property);
 
 		model.addAttribute("message", "Signed in as: " + username);
+		model.addAttribute("propertyId", id);
+		model.addAttribute("propertyAddress", property.getAddress());
 		model.addAttribute("authority", role);
 		model.addAttribute("propertyTickets", tickets);
 
 		return "ticket-center";
 	}
+	@RequestMapping("/ticket-center-closed")
+	public String managerClosedTicketCenterHandler(Model model,
+											 HttpServletRequest request,
+											 Authentication authentication,
+											 @RequestParam("id") long id) {
+		String[] credentials = HelperClass.getUsernameAndRole(request, authentication);
 
-	@RequestMapping("/ViewTicket")
+		String username = credentials[0];
+		String role = credentials[1];
+		Property property = propertyService.getPropertyById(id);
+		List<Ticket> tickets = ticketService.getAllClosedTicketsFromProperty(property);
+
+		System.out.println(property);
+		model.addAttribute("message", "Signed in as: " + username);
+		model.addAttribute("propertyId", id);
+		model.addAttribute("propertyAddress", property.getAddress());
+		model.addAttribute("authority", role);
+		model.addAttribute("propertyTickets", tickets);
+
+		return "ticket-center-closed";
+	}
+
+	@RequestMapping("/ticket")
 	public String viewTicket(Model model,
 							 HttpServletRequest request,
 							 Authentication authentication,
@@ -81,20 +118,22 @@ public class TicketController {
 
 		String username = credentials[0];
 		String role = credentials[1];
+		Ticket ticket = ticketService.getTicketById(id);
+
 		model.addAttribute("user", username);
 		model.addAttribute("authority", role);
-
-		Ticket ticket = ticketService.getTicketById(id);
 		model.addAttribute("ticket", ticket);
+
 		return "view-ticket";
 	}
 
 	@RequestMapping("/ticketAction")
-	public String createTicketHandler(HttpServletRequest request,
+	public ModelAndView createTicketHandler(HttpServletRequest request,
 									  @RequestParam("description") String description) {
 		User user = userService.getUserByUsername(request.getUserPrincipal().getName());
 
 		Ticket ticket = new Ticket();
+
 		ticket.setCreatedBy(user);
 		ticket.setProperty(user.getProperty());
 		ticket.setStatus("OPEN");
@@ -102,12 +141,13 @@ public class TicketController {
 		ticket.setTimestamp(new Date());
 
 		ticketService.addTicket(ticket);
-		return "redirect:/tickets";
+
+		return new ModelAndView("redirect:/my-tickets");
 	}
 
 	@Transactional
-	@RequestMapping("/UpdateStatus")
-	public ModelAndView updateMemoStatus(@RequestParam("id") long id) {
+	@RequestMapping("/update-ticket-status")
+	public ModelAndView updateTicketStatus(@RequestParam("id") long id) {
 		Ticket ticket = ticketService.getTicketById(id);
 
 		if (ticket.getStatus().equals("OPEN")) {

@@ -6,7 +6,6 @@ import com.app.model.Property;
 import com.app.repo.PropertyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -44,7 +43,6 @@ public class PropertyService implements PropertyDAO {
 	}
 
 	@Override
-	@Transactional
 	public void updateProperty(Property property) {
 		Optional<Property> optionalProperty = propertyRepository.findById(property.getId());
 		if (optionalProperty.isPresent())

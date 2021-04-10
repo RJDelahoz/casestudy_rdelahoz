@@ -42,11 +42,10 @@
                             <div class="page-header-content pt-4">
                                 <div class="row align-items-center justify-content-between">
                                     <div class="col-12 col-xl-auto mt-4">
-                                        <h2>
-                                            PROPERTY TICKETS
+                                        <h2 class="text-white" th:text="${user.getProperty().getAddress()}">
                                         </h2>
                                         <div class="page-header-subtitle">
-                                            ORG TICKETS
+                                            These tickets belong to you.
                                         </div>
                                     </div>
                                 </div>
@@ -58,13 +57,12 @@
                             <div class="col-lg-4 col-xl-3 mb-5">
                                 <div class="card bg-transparent">
                                     <div class="list-group list-group-flush small">
-                                        <a class="list-group-item list-group-item-action mb-1" href="#">
-                                            Make New Ticket
-                                        </a>
-                                        <a class="list-group-item list-group-item-action mb-1" href="#">
+                                        <a class="list-group-item list-group-item-action mb-1"
+                                           th:href="@{/my-tickets}">
                                             View Open Tickets
                                         </a>
-                                        <a class="list-group-item list-group-item-action mb-1" href="#">
+                                        <a class="list-group-item list-group-item-action"
+                                           th:href="@{/my-tickets-closed}">
                                             View Closed Tickets
                                         </a>
                                     </div>
@@ -72,9 +70,27 @@
                             </div>
                             <div class="col-lg-8 col-lg-9">
                                 <div class="card bg-transparent mb-5">
+                                    <div th:if="${userTickets.isEmpty()}"  class="list-group list-group-flush">
+                                        <a href="#"
+                                           class="list-group-item list-group-item-action py-4 mb-4">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="mr-4 d-flex">
+                                                    <div>
+                                                        <h2>
+                                                            You currently have no open tickets.<br/>
+                                                            Either they're doing a great job or you're new here.
+                                                        </h2>
+                                                        <h6 class="card-text">
+                                                            probably new...haha :D
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
                                     <div th:each="ticket : ${userTickets}"
                                          class="list-group list-group-flush">
-                                        <a th:href="@{/ViewTicket(id=${ticket.getId()})}"
+                                        <a th:href="@{/ticket(id=${ticket.getId()})}"
                                            class="list-group-item list-group-item-action py-4 mb-4">
                                             <div class="d-flex justify-content-between">
                                                 <div class="mr-4 d-flex">
@@ -102,7 +118,7 @@
                                     </div>
                                     <div class="card-body">
                                         <form th:action="@{/ticketAction}" method="post">
-                                            <textarea class="form-control mb-2" rows="4" th:name="description"
+                                            <textarea class="form-control mb-2" rows="4" th:name="description" th:wrap="physical"
                                                       placeholder="Default status or ticket will be open until review by management"></textarea>
                                             <input class="btn btn-primary btn-sm mr-2" type="submit" value="Create Ticket"/>
                                         </form>

@@ -106,7 +106,7 @@ public class PropertyController {
 		}
 	}
 
-	@RequestMapping("/ViewProperty")
+	@RequestMapping("/view-property")
 	public String viewPropertyHandler(Model model,
 									  HttpServletRequest request,
 									  Authentication authentication,
@@ -125,11 +125,11 @@ public class PropertyController {
 	}
 
 	@Transactional
-	@RequestMapping("/DeleteProperty")
+	@RequestMapping("/delete-property")
 	public String deletePropertyHandler(@RequestParam("id") long id) {
 		Property property = propertyService.deletePropertyById(id);
 		System.out.println(property);
-		return "property";
+		return "properties";
 	}
 
 

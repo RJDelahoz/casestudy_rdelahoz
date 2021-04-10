@@ -23,8 +23,10 @@
             <a class="navbar-brand" href="#">PMP</a>
             <ul class="navbar-nav ml-auto mr-lg-5">
                 <li class="nav-item mr-3">
-                    <a class="nav-link" role="button" th:href="@{/view-property(id=${propertyId})}">
-                        Announcement
+                    <a th:href="@{/welcome}"
+                       class="nav-link"
+                       role="button">
+                        Announcements
                     </a>
                 </li>
                 <li class="nav-item mr-3 mr-lg-0">
@@ -42,10 +44,10 @@
                             <div class="page-header-content pt-4">
                                 <div class="row align-items-center justify-content-between">
                                     <div class="col-12 col-xl-auto mt-4">
-                                        <h2 class="text-white" th:text="${propertyAddress}">
+                                        <h2 class="text-white" th:text="${user.getProperty().getAddress()}">
                                         </h2>
-                                        <div class="page-header-subtitle" >
-                                            <b>Open</b> tickets belonging to this property.
+                                        <div class="page-header-subtitle">
+                                            These tickets belong to you.
                                         </div>
                                     </div>
                                 </div>
@@ -58,15 +60,11 @@
                                 <div class="card bg-transparent">
                                     <div class="list-group list-group-flush small">
                                         <a class="list-group-item list-group-item-action mb-1"
-                                           href="#">
-                                            Manage users in community
-                                        </a>
-                                        <a class="list-group-item list-group-item-action mb-1"
-                                           th:href="@{/ticket-center(id = ${propertyId})}">
+                                           th:href="@{/my-tickets}">
                                             View Open Tickets
                                         </a>
                                         <a class="list-group-item list-group-item-action"
-                                           th:href="@{/ticket-center-closed(id = ${propertyId})}">
+                                           th:href="@{/my-tickets-closed}">
                                             View Closed Tickets
                                         </a>
                                     </div>
@@ -74,7 +72,22 @@
                             </div>
                             <div class="col-lg-8 col-lg-9">
                                 <div class="card bg-transparent mb-5">
-                                    <div th:each="ticket : ${propertyTickets}"
+                                    <div th:if="${userTickets.isEmpty()}"
+                                         class="list-group list-group-flush">
+                                        <a href="#"
+                                           class="list-group-item list-group-item-action py-4 mb-4">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="mr-4 d-flex">
+                                                    <div>
+                                                        <h1>
+                                                            You currently have no closed tickets.<br/>
+                                                        </h1>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div th:each="ticket : ${userTickets}"
                                          class="list-group list-group-flush">
                                         <a th:href="@{/ticket(id=${ticket.getId()})}"
                                            class="list-group-item list-group-item-action py-4 mb-4">
@@ -96,6 +109,21 @@
                                                 </div>
                                             </div>
                                         </a>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header">
+                                        Create New Ticket
+                                    </div>
+                                    <div class="card-body">
+                                        <form th:action="@{/ticketAction}" method="post">
+                                            <textarea class="form-control mb-2" rows="4" th:name="description"
+                                                      placeholder="Default status of ticket will be open until review by management"></textarea>
+                                            <input class="btn btn-primary btn-sm mr-2" type="submit" value="Create Ticket"/>
+                                            <button class="btn btn-secondary bg-secondary btn-sm mr-2">
+                                                Attach a File
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

@@ -2,6 +2,7 @@ package com.app.service;
 
 import com.app.model.Property;
 import com.app.model.Ticket;
+import com.app.model.User;
 import com.app.repo.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,5 +35,13 @@ public class TicketService {
 
 	public List<Ticket> getAllClosedTicketsFromProperty(Property property) {
 		return ticketRepository.findAllByPropertyAndStatusOrderByTimestampAsc(property, "CLOSED");
+	}
+
+	public List<Ticket> getAllOpenTicketsCreatedByUser(User user) {
+		return ticketRepository.findAllByCreatedByAndStatusOrderByTimestampAsc(user, "OPEN");
+	}
+
+	public List<Ticket> getAllClosedTicketsCreatedByUser(User user) {
+		return ticketRepository.findAllByCreatedByAndStatusOrderByTimestampAsc(user, "CLOSED");
 	}
 }
