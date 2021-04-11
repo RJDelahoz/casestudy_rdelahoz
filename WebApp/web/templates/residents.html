@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Admin</title>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous"/>
+
+        <link rel="stylesheet" th:href="@{css/user-layout-style.css}"/>
+        <link rel="stylesheet" th:href="@{css/tables.css}"/>
+        <link rel="stylesheet" th:href="@{css/pagination-style.css}"/>
+
+    </head>
+    <body class="bg-dark">
+        <nav class="topnav navbar navbar-expand justify-content-between navbar-dark">
+            <a class="navbar-brand" href="#">
+                PMP
+            </a>
+            <ul class="navbar-nav align-items-center ml-auto">
+                <li class="nav-item mr-3 mr-lg-0">
+                    <a class="btn ml-lg-4 btn-primary" th:href="@{/logout}">
+                        Log Out
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div id="layout_content">
+            <main>
+                <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+                    <div class="container">
+                        <div class="page-header-content pt-4">
+                            <div class="row align-items-center justify-content-between">
+                                <div class="col-auto mt-4">
+                                    <h1 class="page-header-title" th:text="${address}">
+                                    </h1>
+                                    <div class="page-header-subtitle">
+                                        the residents belong to your community.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <!-- Main page content-->
+                <div class="container mt-n10">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <div class="table">
+                                    <table class="table align-items-center table-flush">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">
+                                                    Email
+                                                </th>
+                                                <th scope="col">
+                                                    First Name
+                                                </th>
+                                                <th scope="col">
+                                                    Last Name
+                                                </th>
+                                                <th scope="col">
+                                                    Username
+                                                </th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="resident: ${residentPage}">
+                                                <th scope="row">
+                                                    <div class="align-items-center">
+                                                        <span class="text-sm" th:text="${resident.getEmail()}">
+                                                        </span>
+                                                    </div>
+                                                </th>
+                                                <td th:text="${resident.getfName()}">
+                                                </td>
+                                                <td th:text="${resident.getlName()}">
+                                                </td>
+                                                <td th:text="${resident.getCredential().getUsername()}">
+
+                                                </td>
+                                                <td class="text-right">
+                                                    <a class="btn ml-lg-4 btn-red"
+                                                       th:href="@{/remove(id=${resident.getCredential().getId()})}">
+                                                        Remove
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-green" type="button">
+                                                        View Details
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="card-footer bg-light py-4">
+                                    <nav aria-label="">
+                                        <ul class="pagination pagination-table">
+                                            <li class="page-item ml-2"
+                                                th:if="${residentPage.totalPages > 0}"
+                                                th:each="pageNumber : ${pageNumbers}">
+                                                <a class="page-link"
+                                                   th:href="@{/admin(page=${pageNumber})}"
+                                                   th:text="${pageNumber}"
+                                                   th:class="${pageNumber == residentPage.number + 1} ? active">
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+    </body>
+</html>
