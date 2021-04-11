@@ -12,18 +12,15 @@
 
         <link rel="stylesheet" th:href="@{css/user-layout-style.css}"/>
         <link rel="stylesheet" th:href="@{css/tables.css}"/>
+        <link rel="stylesheet" th:href="@{css/pagination-style.css}"/>
+
     </head>
     <body class="bg-dark">
         <nav class="topnav navbar navbar-expand justify-content-between navbar-dark">
-            <a class="navbar-brand" href="welcome.html">
+            <a class="navbar-brand" href="#">
                 PMP
             </a>
             <ul class="navbar-nav align-items-center ml-auto">
-                <li class="nav-item mr-3">
-                    <a class="nav-link" role="button">
-                        Work Order
-                    </a>
-                </li>
                 <li class="nav-item mr-3 mr-lg-0">
                     <a class="btn ml-lg-4 btn-primary" th:href="@{/logout}">
                         Log Out
@@ -54,7 +51,7 @@
                         <div class="col">
                             <div class="card">
                                 <div class="table">
-                                    <table class="table align-items-center table-flush" >
+                                    <table class="table align-items-center table-flush">
                                         <thead class="thead-light">
                                             <tr>
                                                 <th scope="col">
@@ -74,7 +71,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="user: ${userListBean}">
+                                            <tr th:each="user: ${userPage}">
                                                 <th scope="row">
                                                     <div class="align-items-center">
                                                         <span class="text-sm" th:text="${user.getEmail()}">
@@ -103,32 +100,16 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="card-footer py-4">
-                                    <nav aria-label="...">
-                                        <ul class="pagination justify-content-end mb-0">
-                                            <li class="page-item disabled">
-                                                <a class="page-link" href="#">
-                                                    <
-                                                </a>
-                                            </li>
-                                            <li class="page-item active">
-                                                <a class="page-link" href="#">
-                                                    1
-                                                </a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#">
-                                                    2
-                                                </a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#">
-                                                    3
-                                                </a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#">
-                                                    >
+                                <div class="card-footer bg-light py-4">
+                                    <nav aria-label="">
+                                        <ul class="pagination pagination-table">
+                                            <li class="page-item ml-2"
+                                                th:if="${userPage.totalPages > 0}"
+                                                th:each="pageNumber : ${pageNumbers}">
+                                                <a class="page-link"
+                                                   th:href="@{/admin(page=${pageNumber})}"
+                                                   th:text="${pageNumber}"
+                                                   th:class="${pageNumber == userPage.number + 1} ? active">
                                                 </a>
                                             </li>
                                         </ul>

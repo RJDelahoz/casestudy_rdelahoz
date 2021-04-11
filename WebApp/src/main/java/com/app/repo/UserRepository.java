@@ -4,6 +4,7 @@ package com.app.repo;
 
 import com.app.model.Authority;
 import com.app.model.Credential;
+import com.app.model.Property;
 import com.app.model.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -19,4 +20,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	User getUserByCredential_Username(String username);
 
 	List<User> getAllByCredentialAuthoritiesNotContaining(Authority authority);
+
+	List<User> findAllByProperty(Property property);
 }

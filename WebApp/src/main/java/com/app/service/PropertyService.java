@@ -50,14 +50,8 @@ public class PropertyService implements PropertyDAO {
 	}
 
 	@Override
-	public Property deletePropertyById(long id) {
-		Optional<Property> optionalProperty = propertyRepository.findById(id);
-		if (optionalProperty.isPresent()) {
-			propertyRepository.delete(optionalProperty.get());
-			return optionalProperty.get();
-		} else {
-			return null;
-		}
+	public void deleteProperty(Property property) {
+		propertyRepository.delete(property);
 	}
 
 	public Optional<Property> findPropertyById(long id) {

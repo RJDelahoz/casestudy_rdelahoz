@@ -8,6 +8,8 @@ import com.app.service.OrganizationService;
 import com.app.service.PropertyService;
 import com.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +20,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 public class PropertyController {
@@ -53,7 +58,7 @@ public class PropertyController {
 		Organization organization = user.getOrganization();
 
 		Memo memo = new Memo();
-		memo.setSubject("GENERIC");
+		memo.setSubject("Welcome!");
 		memo.setContent(message);
 		memo.setProperty(property);
 
@@ -84,7 +89,6 @@ public class PropertyController {
 				userService.addUser(user);
 			}
 		}
-
 		return "redirect:/welcome";
 	}
 
@@ -115,22 +119,49 @@ public class PropertyController {
 		Optional<Property> optionalProperty = propertyService.findPropertyById(id);
 		String username = request.getUserPrincipal().getName();
 		String role = authentication.getAuthorities().toString();
+
 		if (optionalProperty.isPresent()) {
 			Property property = optionalProperty.get();
 			model.addAttribute("authority", role);
 			model.addAttribute("user", userService.getUserByUsername(username));
 			model.addAttribute("property", property);
 		}
+
 		return "property";
 	}
 
 	@Transactional
 	@RequestMapping("/delete-property")
 	public String deletePropertyHandler(@RequestParam("id") long id) {
-		Property property = propertyService.deletePropertyById(id);
-		System.out.println(property);
+		Property property = propertyService.getPropertyById(id);
+		propertyService.deleteProperty(property);
 		return "properties";
 	}
 
+	@RequestMapping("/residents")
+	public String residentTableHandler(Model model,
+										  @RequestParam("propertyId") long id,
+										  @RequestParam("page") Optional<Integer> page){
 
+		Property property = propertyService.getPropertyById(id);
+		List<User> residents  = userService.findAllByProperty(property);
+
+		int currentPage = page.orElse(1);
+
+		Page<User> userPage = userService.getUsersPaginated(PageRequest
+				.of(currentPage -1, 5), residents);
+
+		model.addAttribute("residentPage", userPage);
+
+		int totalPages = userPage.getTotalPages();
+		if (totalPages > 0) {
+			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+					.boxed()
+					.collect(Collectors.toList());
+			model.addAttribute("pageNumbers", pageNumbers);
+		}
+
+		model.addAttribute("address", property.getAddress());
+		return "residents";
+	}
 }

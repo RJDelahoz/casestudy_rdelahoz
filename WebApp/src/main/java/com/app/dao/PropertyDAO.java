@@ -4,7 +4,6 @@ import com.app.model.Organization;
 import com.app.model.Property;
 
 import java.util.List;
-import java.util.PropertyPermission;
 
 public interface PropertyDAO {
 
@@ -22,5 +21,5 @@ public interface PropertyDAO {
 	void updateProperty(Property property);
 
 	// Delete
-	Property deletePropertyById(long id);
+	void deleteProperty(Property property);
 }

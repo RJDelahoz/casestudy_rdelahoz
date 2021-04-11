@@ -46,8 +46,6 @@ public class MemoController {
 		memo.setContent(content);
 		memo.setTimestamp(new Date());
 		memoService.addMemo(memo);
-		return new ModelAndView("redirect:/ViewProperty?id="+property.getId());
+		return new ModelAndView("redirect:/view-property?id="+property.getId());
 	}
-
-
 }

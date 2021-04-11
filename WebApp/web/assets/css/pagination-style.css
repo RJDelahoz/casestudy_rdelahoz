@@ -1,9 +1,26 @@
+ol, ul, dl {
+	margin-top: 0;
+	margin-bottom: 1rem;
+}
+
 .pagination {
 	display: flex;
 	padding-left: 0;
 	list-style: none;
 	border-radius: 0.35rem;
 }
+
+.pagination {
+	display: flex;
+	padding-left: 0;
+	list-style: none;
+	border-radius: 0.35rem;
+}
+
+.pagination-table .page-item:first-child {
+	margin-left: 0;
+}
+
 .page-link {
 	position: relative;
 	display: block;
@@ -13,22 +30,4 @@
 	color: #0061f2;
 	background-color: #fff;
 	border: 1px solid #d4dae3;
-}
-
-.pagination .page-item {
-	margin-left: 0.25rem;
-	margin-right: 0.25rem;
-}
-.pagination .page-item:first-child {
-	margin-left: 0;
-}
-.pagination .page-item:last-child {
-	margin-right: 0;
-}
-.pagination .page-item .page-link {
-	border-radius: 0.35rem;
-	border: none;
-	padding: 0.75rem 1rem;
-	font-weight: 700;
-	font-size: 0.9rem;
 }
