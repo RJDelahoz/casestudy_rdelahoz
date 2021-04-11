@@ -3,21 +3,18 @@ package com.app.repo;
 
 
 import com.app.model.Authority;
-import com.app.model.Credential;
 import com.app.model.Property;
 import com.app.model.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.validation.constraints.Email;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 
-	User getUserByEmail(String email);
-
-	User getUserByCredential_Username(String username);
+	Optional<User> findByCredential_Username(String username);
 
 	List<User> getAllByCredentialAuthoritiesNotContaining(Authority authority);
 

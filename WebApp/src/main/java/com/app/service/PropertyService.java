@@ -1,17 +1,19 @@
 package com.app.service;
 
-import com.app.dao.PropertyDAO;
+import com.app.dao.PropertyDao;
 import com.app.model.Organization;
 import com.app.model.Property;
 import com.app.repo.PropertyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PropertyService implements PropertyDAO {
+@Transactional
+public class PropertyService implements PropertyDao {
 
 	private final PropertyRepository propertyRepository;
 
@@ -19,7 +21,6 @@ public class PropertyService implements PropertyDAO {
 	public PropertyService(PropertyRepository propertyRepository) {
 		this.propertyRepository = propertyRepository;
 	}
-
 
 	@Override
 	public void addProperty(Property property) {
@@ -43,6 +44,16 @@ public class PropertyService implements PropertyDAO {
 	}
 
 	@Override
+	public Optional<Property> findPropertyById(long id) {
+		return propertyRepository.findById(id);
+	}
+
+	@Override
+	public Optional<Property> findPropertyByAddressAndOrgName(String address, String orgName) {
+		return propertyRepository.findPropertyByAddressAndManagedBy_Name(address, orgName);
+	}
+
+	@Override
 	public void updateProperty(Property property) {
 		Optional<Property> optionalProperty = propertyRepository.findById(property.getId());
 		if (optionalProperty.isPresent())
@@ -54,11 +65,5 @@ public class PropertyService implements PropertyDAO {
 		propertyRepository.delete(property);
 	}
 
-	public Optional<Property> findPropertyById(long id) {
-		return propertyRepository.findById(id);
-	}
 
-	public Optional<Property> findPropertyByAddressAndOrgName(String address, String orgName) {
-		return propertyRepository.findPropertyByAddressAndManagedBy_Name(address, orgName);
-	}
 }

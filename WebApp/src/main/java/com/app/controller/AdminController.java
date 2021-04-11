@@ -1,9 +1,8 @@
 package com.app.controller;
 
-import com.app.model.Property;
 import com.app.model.User;
 import com.app.service.CredentialService;
-import com.app.service.UserService;
+import com.app.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,12 +20,12 @@ import java.util.stream.IntStream;
 @Controller
 public class AdminController {
 
-	private final UserService userService;
+	private final UserDao userDao;
 	private final CredentialService credentialService;
 
 	@Autowired
-	public AdminController(UserService userService, CredentialService credentialService) {
-		this.userService = userService;
+	public AdminController(UserDao userDao, CredentialService credentialService) {
+		this.userDao = userDao;
 		this.credentialService = credentialService;
 	}
 
@@ -37,11 +36,11 @@ public class AdminController {
 		model.addAttribute("message",
 				HelperClass.greetingHelper(request.getUserPrincipal().getName()));
 
-		List<User> users  = userService.getAllUsers();
+		List<User> users  = userDao.getAllUsers();
 
 		int currentPage = page.orElse(1);
 
-		Page<User> userPage = userService.getUsersPaginated(PageRequest
+		Page<User> userPage = userDao.getUsersPaginated(PageRequest
 				.of(currentPage-1, 2), users);
 
 		model.addAttribute("userPage", userPage);
@@ -61,6 +60,4 @@ public class AdminController {
 		credentialService.deleteCredential(id);
 		return "redirect:/admin";
 	}
-
-
 }

@@ -44,10 +44,10 @@ public class CredentialService implements UserDetailsService {
 			userBuilder.disabled(!credential.isEnabled());
 
 			Set<Authority> authorities = credential.getAuthorities();
- 			String[] permissions = authorities.stream()
+			String[] permissions = authorities.stream()
 					.map(Authority::getRole).toArray(String[]::new);
 
- 			userBuilder.authorities(permissions);
+			userBuilder.authorities(permissions);
 		} else{
 			throw new UsernameNotFoundException("User not found!");
 		}

@@ -1,9 +1,9 @@
 package com.app.controller;
 
+import com.app.dao.MemoDao;
+import com.app.dao.PropertyDao;
 import com.app.model.Memo;
 import com.app.model.Property;
-import com.app.service.MemoService;
-import com.app.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,19 +18,18 @@ import java.util.Date;
 @Controller
 public class MemoController {
 
-	private final PropertyService propertyService;
-	private final MemoService memoService;
+	private final PropertyDao propertyDao;
+	private final MemoDao memoDao;
 
 	@Autowired
-	public MemoController(PropertyService propertyService, MemoService memoService) {
-		this.propertyService = propertyService;
-		this.memoService = memoService;
+	public MemoController(PropertyDao propertyDao, MemoDao memoDao) {
+		this.propertyDao = propertyDao;
+		this.memoDao = memoDao;
 	}
 
 	@RequestMapping(value = "/memo")
 	public String memoFormHandler(Model model,
 								  @RequestParam("id") long id) {
-		Memo memo = propertyService.getPropertyById(id).getMemo();
 		model.addAttribute("propertyId", id);
 		return "memo";
 	}
@@ -40,12 +39,12 @@ public class MemoController {
 	public ModelAndView processMemoFormHandler(@RequestParam("propertyId") long id,
 											   @RequestParam("subject") String subject,
 											   @RequestParam("message") String content) {
-		Property property = propertyService.getPropertyById(id);
+		Property property = propertyDao.getPropertyById(id);
 		Memo memo = property.getMemo();
 		memo.setSubject(subject);
 		memo.setContent(content);
 		memo.setTimestamp(new Date());
-		memoService.addMemo(memo);
+		memoDao.addMemo(memo);
 		return new ModelAndView("redirect:/view-property?id="+property.getId());
 	}
 }

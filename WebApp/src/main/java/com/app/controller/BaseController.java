@@ -1,12 +1,12 @@
 package com.app.controller;
 
+import com.app.dao.OrganizationDao;
 import com.app.model.Authority;
 import com.app.model.Credential;
 import com.app.model.Organization;
 import com.app.model.User;
 import com.app.service.CredentialService;
-import com.app.service.OrganizationService;
-import com.app.service.UserService;
+import com.app.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -21,17 +21,16 @@ import java.util.Optional;
 @Controller
 public class BaseController {
 
-
 	private final CredentialService credentialService;
-	private final UserService userService;
-	private final OrganizationService organizationService;
+	private final UserDao userDao;
+	private final OrganizationDao organizationDao;
 
 	@Autowired
-	public BaseController(CredentialService credentialService, UserService userService,
-						  OrganizationService organizationService) {
+	public BaseController(CredentialService credentialService, UserDao userDao,
+						  OrganizationDao organizationDao) {
 		this.credentialService = credentialService;
-		this.userService = userService;
-		this.organizationService = organizationService;
+		this.userDao = userDao;
+		this.organizationDao = organizationDao;
 	}
 
 	@RequestMapping("/")
@@ -58,7 +57,7 @@ public class BaseController {
 			user.setlName("Delahoz");
 			user.setCredential(credential);
 
-			userService.addUser(user);
+			userDao.addUser(user);
 		}
 
 		return "index";
@@ -99,7 +98,7 @@ public class BaseController {
 
 		Optional<Credential> optionalCredential = credentialService.getCredentialByUsername(username);
 		Optional<Organization> optionalOrganization =
-				organizationService.findOrganizationByName(orgName);
+				organizationDao.findOrganizationByName(orgName);
 		if (!optionalCredential.isPresent() && !optionalOrganization.isPresent()) {
 			Credential credential = new Credential();
 			credential.setUsername(username);
@@ -119,7 +118,7 @@ public class BaseController {
 
 			user.setOrganization(organization);
 
-			userService.addUser(user);
+			userDao.addUser(user);
 		}
 
 		return "redirect:/login";
@@ -155,7 +154,7 @@ public class BaseController {
 			credential.getAuthorities().add(authority);
 			user.setCredential(credential);
 
-			userService.addUser(user);
+			userDao.addUser(user);
 		}
 
 		return "redirect:/login";
@@ -166,5 +165,4 @@ public class BaseController {
 		System.out.println("\n\nPassword recovery Page\n\n");
 		return "password-recovery";
 	}
-
 }
