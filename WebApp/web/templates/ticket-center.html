@@ -43,7 +43,7 @@
                                     <div class="col-12 col-xl-auto mt-4">
                                         <h2 class="text-white" th:text="${propertyAddress}">
                                         </h2>
-                                        <div class="page-header-subtitle" >
+                                        <div class="page-header-subtitle">
                                             <b>Open</b> tickets belonging to this property.
                                         </div>
                                     </div>
@@ -73,7 +73,7 @@
                             </div>
                             <div class="col-lg-8 col-lg-9">
                                 <div class="card bg-transparent mb-5">
-                                    <div th:if="${propertyTickets.isEmpty()}"  class="list-group list-group-flush">
+                                    <div th:if="${propertyTickets.isEmpty()}" class="list-group list-group-flush">
                                         <a href="#"
                                            class="list-group-item list-group-item-action py-4 mb-4">
                                             <div class="d-flex justify-content-between">
@@ -95,17 +95,16 @@
                                             <div class="d-flex justify-content-between">
                                                 <div class="mr-4 d-flex">
                                                     <div>
+                                                        <span th:text="${#dates.format(ticket.getTimestamp(), 'MM-dd-yyyy')}"
+                                                        class="mb-1 small"></span>
                                                         <h6>
                                                             TICKET# <span th:text="${ticket.getId()}"></span>
                                                         </h6>
                                                         <p th:text="${ticket.getDescription()}" class="card-text">
                                                         </p>
-                                                    </div>
-                                                </div>
-                                                <div class="small">
-                                                    <span th:text="${ticket.getTimestamp().toString()}"></span>
-                                                    <div class="badge badge-green-soft badge-pill text-green"
-                                                         th:text="${ticket.getStatus()}">
+                                                        <div class="badge badge-green-soft badge-pill text-green"
+                                                             th:text="${ticket.getStatus()}">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

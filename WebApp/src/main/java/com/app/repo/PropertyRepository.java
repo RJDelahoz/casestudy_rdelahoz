@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface PropertyRepository extends JpaRepository<Property, Long> {
 
 	Optional<Property> findPropertyByAddressAndManagedBy_Name(String address, String name);
+
+	Optional<Property> findByAddress(String address);
 }

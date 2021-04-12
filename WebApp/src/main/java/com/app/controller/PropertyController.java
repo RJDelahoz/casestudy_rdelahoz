@@ -3,23 +3,22 @@ package com.app.controller;
 import com.app.dao.OrganizationDao;
 import com.app.dao.PropertyDao;
 import com.app.dao.UserDao;
-import com.app.model.Memo;
-import com.app.model.Organization;
-import com.app.model.Property;
-import com.app.model.User;
+import com.app.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -44,16 +43,24 @@ public class PropertyController {
 	@RequestMapping("/register-property")
 	public String getPropertyForm(Model model) {
 		model.addAttribute("propertyForm", new Property());
+		model.addAttribute("states", StateCode.values());
 		return "register-property";
 	}
 
 	@RequestMapping(value = "/register-property", method = RequestMethod.POST)
-	public String processPropertyForm(HttpServletRequest request,
+	public String processPropertyForm(Model model,
+									  HttpServletRequest request,
 									  @RequestParam("message") String message,
-									  @ModelAttribute("propertyForm") Property property) {
+									  @Valid @ModelAttribute("propertyForm") Property property,
+									  BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("propertyForm", new Property());
+			model.addAttribute("states", StateCode.values());
+			return "register-property";
+		}
 		String username = request.getUserPrincipal().getName();
 
-		Optional<User> optionalUser = userDao.getUserByUsername(username);
+		Optional<User> optionalUser = userDao.findUserByUsername(username);
 		if (optionalUser.isPresent()) {
 			User user = optionalUser.get();
 			Organization organization = user.getOrganization();
@@ -79,28 +86,22 @@ public class PropertyController {
 		Optional<Organization> organization =
 				organizationDao.findOrganizationByName(orgName);
 		String username = request.getUserPrincipal().getName();
-
-		if (organization.isPresent()) {
-			Optional<Property> optionalProperty =
-					propertyDao.findPropertyByAddressAndOrgName(address, orgName);
-
-			if (optionalProperty.isPresent()) {
-				Optional<User> optionalUser = userDao.getUserByUsername(username);
-				if (optionalUser.isPresent()) {
-					User user = optionalUser.get();
-					user.setProperty(optionalProperty.get());
-					userDao.updateUser(user);
-				}
-			}
-		}
-		return "redirect:/welcome";
+		Optional<Property> optionalProperty =
+				propertyDao.getPropertyByAddress(address);
+		if (organization.isPresent() && optionalProperty.isPresent()) {
+			User user = userDao.getUserByUsername(username);
+			user.setProperty(optionalProperty.get());
+			userDao.updateUser(user);
+			return "redirect:/welcome";
+		} else
+			return "request-access";
 	}
 
 	@RequestMapping("/properties")
 	public String propertiesHandler(Model model,
 									HttpServletRequest request) {
 		String username = request.getUserPrincipal().getName();
-		Optional<User> optionalUser = userDao.getUserByUsername(username);
+		Optional<User> optionalUser = userDao.findUserByUsername(username);
 		if (optionalUser.isPresent()) {
 			User user = optionalUser.get();
 
@@ -115,7 +116,7 @@ public class PropertyController {
 				return "properties";
 			}
 		}
-		return "/403";
+		return "error-403";
 	}
 
 	@RequestMapping("/view-property")
@@ -138,19 +139,17 @@ public class PropertyController {
 		return "property";
 	}
 
-	@Transactional
 	@RequestMapping("/delete-property")
-	public String deletePropertyHandler(@RequestParam("id") long id) {
+	public ModelAndView deletePropertyHandler(@RequestParam("id") long id) {
 		Property property = propertyDao.getPropertyById(id);
 		propertyDao.deleteProperty(property);
-		return "properties";
+		return new ModelAndView("redirect:/properties");
 	}
 
 	@RequestMapping("/residents")
 	public String residentTableHandler(Model model,
 									   @RequestParam("id") long id,
 									   @RequestParam("page") Optional<Integer> page) {
-
 		Property property = propertyDao.getPropertyById(id);
 		List<User> residents = userDao.findAllByProperty(property);
 

@@ -39,7 +39,7 @@ public class TicketController {
 										 Authentication authentication) {
 		String[] credentials = HelperClass.getUsernameAndRole(request, authentication);
 
-		Optional<User> optionalUser = userDao.getUserByUsername(credentials[0]);
+		Optional<User> optionalUser = userDao.findUserByUsername(credentials[0]);
 		String role = credentials[1];
 		if (optionalUser.isPresent()) {
 			User user = optionalUser.get();
@@ -58,7 +58,7 @@ public class TicketController {
 										   Authentication authentication) {
 		String[] credentials = HelperClass.getUsernameAndRole(request, authentication);
 
-		Optional<User> optionalUser = userDao.getUserByUsername(credentials[0]);
+		Optional<User> optionalUser = userDao.findUserByUsername(credentials[0]);
 		String role = credentials[1];
 		if (optionalUser.isPresent()) {
 			User user = optionalUser.get();
@@ -134,7 +134,7 @@ public class TicketController {
 	@RequestMapping("/ticketAction")
 	public ModelAndView createTicketHandler(HttpServletRequest request,
 											@RequestParam("description") String description) {
-		Optional<User> optionalUser = userDao.getUserByUsername(request.getUserPrincipal().getName());
+		Optional<User> optionalUser = userDao.findUserByUsername(request.getUserPrincipal().getName());
 
 		if (optionalUser.isPresent()) {
 			User user = optionalUser.get();

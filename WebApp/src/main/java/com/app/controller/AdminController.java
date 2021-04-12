@@ -37,11 +37,9 @@ public class AdminController {
 				HelperClass.greetingHelper(request.getUserPrincipal().getName()));
 
 		List<User> users  = userDao.getAllUsers();
-
 		int currentPage = page.orElse(1);
-
 		Page<User> userPage = userDao.getUsersPaginated(PageRequest
-				.of(currentPage-1, 2), users);
+				.of(currentPage-1, 5), users);
 
 		model.addAttribute("userPage", userPage);
 

@@ -67,7 +67,6 @@
                                                     Username
                                                 </th>
                                                 <th></th>
-                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -83,18 +82,12 @@
                                                 <td th:text="${user.getlName()}">
                                                 </td>
                                                 <td th:text="${user.getCredential().getUsername()}">
-
                                                 </td>
                                                 <td class="text-right">
-                                                    <a class="btn ml-lg-4 btn-red"
+                                                    <a class="btn ml-lg-4 btn-primary btn-red"
                                                        th:href="@{/delete(id=${user.getCredential().getId()})}">
                                                         DELETE
                                                     </a>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-green" type="button">
-                                                        VIEW
-                                                    </button>
                                                 </td>
                                             </tr>
                                         </tbody>

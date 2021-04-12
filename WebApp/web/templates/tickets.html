@@ -95,17 +95,16 @@
                                             <div class="d-flex justify-content-between">
                                                 <div class="mr-4 d-flex">
                                                     <div>
+                                                        <span th:text="${#dates.format(ticket.getTimestamp(), 'MM-dd-yyyy')}"
+                                                              class="mb-1 small"></span>
                                                         <h6>
                                                             TICKET# <span th:text="${ticket.getId()}"></span>
                                                         </h6>
                                                         <p th:text="${ticket.getDescription()}" class="card-text">
                                                         </p>
-                                                    </div>
-                                                </div>
-                                                <div class="small">
-                                                    <span th:text="${ticket.getTimestamp().toString()}"></span>
-                                                    <div class="badge badge-green-soft badge-pill text-green"
-                                                         th:text="${ticket.getStatus()}">
+                                                        <div class="badge badge-green-soft badge-pill text-green"
+                                                             th:text="${ticket.getStatus()}">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

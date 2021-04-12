@@ -42,8 +42,12 @@ public class UserService implements UserDao {
 	}
 
 	@Override
-	public Optional<User> getUserByUsername(String username) {
+	public Optional<User> findUserByUsername(String username) {
 		return userRepository.findByCredential_Username(username);
+	}
+
+	public User getUserByUsername(String username) {
+		return findUserByUsername(username).orElse(null);
 	}
 
 	@Override

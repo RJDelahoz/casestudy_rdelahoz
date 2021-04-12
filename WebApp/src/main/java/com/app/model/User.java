@@ -4,6 +4,10 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,12 +24,19 @@ public class User {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Credential credential;
 
+	// Regex for email validation
+	@Pattern(regexp = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,3}",
+			message = "Please enter a valid email.")
 	@Column(name = "email", unique = true, nullable = false)
 	private String email;
 
+	@NotBlank
+	@Size(min = 2, max = 25)
 	@Column(name = "fName", length = 25, nullable = false)
 	private String fName;
 
+	@NotBlank
+	@Size(min = 2, max = 25)
 	@Column(name = "lName", length = 25, nullable = false)
 	private String lName;
 

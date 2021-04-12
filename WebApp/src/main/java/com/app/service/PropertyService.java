@@ -3,11 +3,17 @@ package com.app.service;
 import com.app.dao.PropertyDao;
 import com.app.model.Organization;
 import com.app.model.Property;
+import com.app.model.Ticket;
 import com.app.repo.PropertyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,8 +40,8 @@ public class PropertyService implements PropertyDao {
 	}
 
 	@Override
-	public Property getPropertyByAddress(String address) {
-		return null;
+	public Optional<Property> getPropertyByAddress(String address) {
+		return propertyRepository.findByAddress(address);
 	}
 
 	@Override
@@ -56,8 +62,9 @@ public class PropertyService implements PropertyDao {
 	@Override
 	public void updateProperty(Property property) {
 		Optional<Property> optionalProperty = propertyRepository.findById(property.getId());
-		if (optionalProperty.isPresent())
+		if (optionalProperty.isPresent()) {
 			propertyRepository.save(property);
+		}
 	}
 
 	@Override

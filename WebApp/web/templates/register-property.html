@@ -52,43 +52,60 @@
                                         <form th:action="@{/register-property}" th:object="${propertyForm}"
                                               method="POST">
                                             <div class="form-group">
-                                                <label class="small mb-1" for="address">
+                                                <label class="small mb-1" th:for="address">
                                                     Address Line
                                                 </label>
-                                                <input class="form-control" id="address" th:name="address" type="text"
+                                                <input class="form-control" id="address" th:field="*{address}" type="text"
                                                        placeholder="street" required/>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
-                                                    <label class="small mb-1" for="city">
+                                                    <label class="small mb-1" th:for="city">
                                                         City
                                                     </label>
-                                                    <input class="form-control" id="city" th:name="city" type="text"
+                                                    <label th:if="${#fields.hasAnyErrors()}"
+                                                           th:error="*{city}">
+                                                        Invalid City
+                                                    </label>
+                                                    <input class="form-control" id="city" th:field="*{city}" type="text"
                                                            placeholder="City" required/>
+
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                    <label class="small mb-1" for="state">
+                                                    <label class="small mb-1" th:for="state">
                                                         State
                                                     </label>
-                                                    <input class="form-control" id="state" th:name="state" type="text"
-                                                           placeholder="State" required/>
+                                                    <select class="form-control" th:field="*{state}">
+                                                        <option th:each="value: ${states}"
+                                                                th:text="${value.name()}"
+                                                                th:value="${value}">
+                                                        </option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
-                                                    <label class="small mb-1" for="zipcode">
+                                                    <label class="small mb-1" th:for="zipcode">
                                                         Zipcode
                                                     </label>
-                                                    <input class="form-control" id="zipcode" th:name="zipcode"
+                                                    <label th:if="${#fields.hasErrors('zipcode')}"
+                                                           th:error="*{zipcode}" class="text-danger">
+                                                        Invalid Zipcode
+                                                    </label>
+                                                    <input class="form-control" id="zipcode" th:field="*{zipcode}"
                                                            type="text"
                                                            placeholder="zipcode"/>
                                                 </div>
                                             </div>
                                             <div class="form-row">
-                                                    <textarea class="mb-2" rows="4" th:name="message"
+                                                <div class="form-group col-12">
+                                                    <label class="small mb-1" for="message">
+                                                        Message
+                                                    </label>
+                                                    <textarea class="form-control mb-1"  rows="4" id="message" th:name="message"
                                                               th:wrap="physical"
                                                               placeholder="Default status or ticket will be open until review by management"></textarea>
-
+                                                </div>
                                             </div>
                                             <div class="form-group mt-2 mb-0 col-md-2">
                                                 <input class="btn btn-primary btn-block" type="submit" value="GO"/>

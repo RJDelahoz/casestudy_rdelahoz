@@ -21,8 +21,9 @@ public interface UserDao {
 	//Retrieve
 	Optional<User> getUserById(long id);
 
-	Optional<User> getUserByUsername(String username);
+	Optional<User> findUserByUsername(String username);
 
+	User getUserByUsername(String username);
 	List<User> getAllUsers();
 
 	List<User> findAllByProperty(Property property);

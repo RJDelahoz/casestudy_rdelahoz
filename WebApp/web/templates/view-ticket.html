@@ -111,7 +111,8 @@
                                         <span th:text="${ticket.getCreatedBy().getfName()}"></span> <span
                                             th:text="${ticket.getCreatedBy().getlName()}"></span>
                                     </span>
-                                            <div class="text-xs text-muted" th:text="${ticket.getTimestamp()}">
+                                            <div class="text-xs text-muted"
+                                                 th:text="${#dates.format(ticket.getTimestamp(), 'MM-dd-yyyy')}">
                                             </div>
                                         </div>
                                         <a href="#">

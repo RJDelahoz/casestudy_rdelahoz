@@ -11,7 +11,7 @@ public interface PropertyDao {
 
 	Property getPropertyById(long id);
 
-	Property getPropertyByAddress(String address);
+	Optional<Property> getPropertyByAddress(String address);
 
 	List<Property> getPropertyOrganization(Organization organization);
 

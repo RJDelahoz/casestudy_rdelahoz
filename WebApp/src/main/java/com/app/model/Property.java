@@ -4,6 +4,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,12 +20,15 @@ public class Property {
 	@Column(name = "address", nullable = false, unique = true)
 	private String address;
 
+	@Pattern(regexp = "[\\w\\s]+",
+			message = "Please enter a valid city.")
 	@Column(name = "city", nullable = false)
 	private String city;
 
 	@Column(name = "state", nullable = false, length = 2)
 	private String state;
 
+	@Pattern(regexp = "^[0-9]{5}", message = "only 5 digits")
 	@Column(name = "zipcode", nullable = false, length = 5)
 	private String zipcode;
 

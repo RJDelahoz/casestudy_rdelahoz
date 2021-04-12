@@ -26,7 +26,7 @@ public class UserController {
 								 Authentication authentication,
 								 HttpServletRequest request) {
 		String[] credentials = HelperClass.getUsernameAndRole(request, authentication);
-		Optional<User> optionalUser = userDao.getUserByUsername(credentials[0]);
+		Optional<User> optionalUser = userDao.findUserByUsername(credentials[0]);
 		String role = credentials[1];
 
 		if (optionalUser.isPresent()) {
