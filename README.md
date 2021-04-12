@@ -2,24 +2,20 @@
 
 ---
 
-## Property Management System
+## Property Management Platform
 
 -   Primary users
-    -   Property manager
-        -   Access to properties they created.
-        -   Ability to create, remove, update, and delete property information.
-        -   Assign property to other members of staff (property moderators).
-        -   Send email invitation to residents so that they may claim unit in the property community.
-        -   Ability to change workorder status and visibility.
-    -   Property moderator
-        -   Access to properties that have been granted to by the property manager
+    -   As an admin I want to     
+        -   see all the users in my system 
+        -   remove any user in my system
+    -   As a manager I want to
+        -   add my organization upon registration
+        -   add any properties managed by my company
+        -   update the welcome page of my property with useful information
+        -   view residential tickets
         -   Ability to also manage residential work order under given property
-    -   Resident
-        -   Access to property they have been invited to by the Property manager/mod
-        -   Ability to create work order exclusive to property.
-        -   
-        -   Ability submit work order form to property staff for review.
-        -   Resident can submit workorder.
-
--   Visitor
-    -   Ablility to register properties under property management company.
+        -   change their resolution status
+    -   As a user I want to
+        -   join a property managed by an organization.
+        -   create tickets for management to see.
+        -   view open and closed tickets.
